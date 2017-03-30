@@ -3,17 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ribic.nejc.party.MainActivity">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_parties"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view_days">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/testTextView"/>
+
+    <ProgressBar
+        android:id="@+id/pb_loading_main_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
