@@ -47,10 +47,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
     class MainAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView mTextViewDate;
-        public TextView mTextViewParty;
+        private TextView mTextViewDate;
+        private TextView mTextViewParty;
 
-        public MainAdapterViewHolder(View itemView) {
+        private MainAdapterViewHolder(View itemView) {
             super(itemView);
             mTextViewDate = (TextView) itemView.findViewById(R.id.tv_party_date);
             mTextViewParty = (TextView) itemView.findViewById(R.id.tv_party_name);
