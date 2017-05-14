@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
-    private static final String COUNTRY_PARTIES_URL = "http://countryparties.azurewebsites.net/";
+    private static final String COUNTRY_PARTIES_URL = "http://nejcribic.com/veselice_api/myApi.php?getAll/";
 
     private static final String format = "json";
 

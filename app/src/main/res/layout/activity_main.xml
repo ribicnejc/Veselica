@@ -4,8 +4,15 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <Button
+        android:text="Notification test"
+        android:id="@+id/button_notification_test"
+        android:onClick="testNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/button_notification_test"
         android:id="@+id/rv_parties"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

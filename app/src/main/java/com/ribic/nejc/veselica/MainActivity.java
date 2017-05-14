@@ -16,13 +16,14 @@ import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
+import com.ribic.nejc.veselica.utils.NotificationUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
-
+//TODO make notification
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainAdapterOnClickHandler{
     public ProgressBar mProgressBar;
     public RecyclerView mRecyclerView;
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
     @Override
     public void partyOnClick(int clickedItemIndex) {
         Toast.makeText(this, "Time to go to sleep!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
     }
 
     private class FetchData extends AsyncTask<String, String, ArrayList<Party>> {

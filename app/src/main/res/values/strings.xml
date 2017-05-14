@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Veselica</string>
+    <string name="notification_title">Test notification</string>
+    <string name="notification_text">Just some notification test</string>
+    <string name="notification_big_text">Some big text</string>
 </resources>
