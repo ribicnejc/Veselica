@@ -1,6 +1,9 @@
 package com.ribic.nejc.veselica;
 
-import android.graphics.drawable.GradientDrawable;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.objects.Party;
+import com.ribic.nejc.veselica.sync.NotificationAlarmReceiver;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
 import com.ribic.nejc.veselica.utils.NotificationUtils;
 
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 //TODO make notification
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainAdapterOnClickHandler{
     public ProgressBar mProgressBar;
@@ -42,7 +47,33 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
 
         mRecyclerView.setLayoutManager(layoutManager);
 
+        //setUpCalender();
+        alarmMethod();
         new FetchData().execute();
+    }
+
+    private void alarmMethod() {
+        //TODO give option for particular party in settings
+        Intent intent = new Intent("com.ribic.nejc.veselica.PUSH_NOTIFICATION");
+        //Intent intent = new Intent(this, NotificationAlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), NotificationUtils.PARTY_REMINDER_INTENT_ID, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        // setup time for alarm
+        Calendar alarmTime = Calendar.getInstance();
+
+        // set time-part of alarm
+        alarmTime.set(Calendar.SECOND, 0);
+        alarmTime.set(Calendar.MINUTE, 15);
+        alarmTime.set(Calendar.HOUR, 6);
+        alarmTime.set(Calendar.AM_PM, Calendar.PM);
+        alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+
+        // calculate interval (7 days) in ms
+//        int interval2 = 60000;//10s
+        //TODO set for weeks
+        int interval = 1000 * 60 * 60 * 24 * 7;
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
     }
 
     @Override
