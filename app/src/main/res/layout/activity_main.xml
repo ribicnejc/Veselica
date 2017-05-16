@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:text="Notification test"
-        android:id="@+id/button_notification_test"
-        android:onClick="testNotification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/button_notification_test"
-        android:id="@+id/rv_parties"
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_parties"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/pb_loading_main_activity"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content" />
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

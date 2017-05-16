@@ -4,6 +4,16 @@ public class Party {
     private String date;
     private String place;
     private String href;
+    private String id;
+
+    public Party(){}
+
+    public Party(String date, String place, String href, String id){
+        setDate(date);
+        setPlace(place);
+        setHref(href);
+        setId(id);
+    }
 
     public String getDate() {
         return date;
@@ -27,5 +37,13 @@ public class Party {
 
     public void setHref(String href) {
         this.href = href;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

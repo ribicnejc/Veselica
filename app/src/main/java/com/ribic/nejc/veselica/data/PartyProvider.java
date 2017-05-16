@@ -4,6 +4,8 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -68,13 +70,36 @@ public class PartyProvider extends ContentProvider{
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        return null;
+        return cursor;
     }
 
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
         return null;
+    }
+
+    @Override
+    public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        switch (sUriMatcher.match(uri)){
+            case CODE_PARTY:
+                db.beginTransaction();
+                int rowsInserted = 0;
+                try{
+                    for (ContentValues value : values){
+                        long _id = db.insert(PartyContract.PartyEntry.TABLE_NAME, null, value);
+                        if (_id != -1) rowsInserted++;
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+                if (rowsInserted > 0) getContext().getContentResolver().notifyChange(uri, null);
+                return rowsInserted;
+            default:
+                return super.bulkInsert(uri, values);
+        }
     }
 
     @Nullable
