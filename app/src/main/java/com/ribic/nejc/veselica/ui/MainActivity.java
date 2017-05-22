@@ -37,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 //TODO sync when internet come
 //TODO same as in QuoteSyncJob
+//TODO add real data to notification
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainAdapterOnClickHandler,
 SwipeRefreshLayout.OnRefreshListener{
 
