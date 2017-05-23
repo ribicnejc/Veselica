@@ -37,7 +37,12 @@
         </receiver>
 
         <activity android:name="com.ribic.nejc.veselica.ui.SettingsActivity" />
-        <activity android:name="com.ribic.nejc.veselica.ui.DetailActivity"></activity>
+        <activity android:name="com.ribic.nejc.veselica.ui.DetailActivity"
+            android:parentActivityName="com.ribic.nejc.veselica.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ribic.nejc.veselica.ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

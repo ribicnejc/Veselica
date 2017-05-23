@@ -18,6 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
@@ -41,12 +48,13 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainAdapterOnClickHandler,
 SwipeRefreshLayout.OnRefreshListener{
 
+    public static final String EXTRA_HREF = "com.nejc.ribic.href";
+
     @BindView(R.id.rv_parties)
     public RecyclerView mRecyclerView;
-
     public SwipeRefreshLayout mSwipeRefreshLayout;
-
     public MainAdapter mMainAdapter;
+    public ArrayList<Party> mParties;
     public static final String TAG = MainActivity.class.getSimpleName();
 
     //TODO butterknife
@@ -91,13 +99,15 @@ SwipeRefreshLayout.OnRefreshListener{
 
         // calculate interval (7 days) in ms
 //        int interval2 = 60000;//10s
-        int interval = 1000 * 60 * 60 * 24 * 7;
+        int interval = 1000 * 60 * 60 * 24;// * 7;
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
     }
 
     @Override
     public void partyOnClick(int clickedItemIndex) {
-        Toast.makeText(this, "Time to go to sleep!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
+        startActivity(intent);
     }
 
     @Override
@@ -110,6 +120,15 @@ SwipeRefreshLayout.OnRefreshListener{
             readDataFromDatabase();
         }
     }
+
+
+    private void getAllParties(){
+        final RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        String url = NetworkUtils.getUrlAll();
+        mParties = new ArrayList<>();
+    }
+
+
 
     private class FetchData extends AsyncTask<String, String, ArrayList<Party>> {
 

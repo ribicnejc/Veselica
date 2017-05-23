@@ -1,9 +1,6 @@
 package com.ribic.nejc.veselica.utils;
 
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 
@@ -16,17 +13,40 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
-    private static final String COUNTRY_PARTIES_URL = "http://dev.nejcribic.com/veselice_api/myApi.php?getAll/";
+    private static final String COUNTRY_PARTIES_MAIN = "http://dev.nejcribic.com/veselice_api/myApi.php?";
+    private static final String COUNTRY_PARTIES_URL = COUNTRY_PARTIES_MAIN + "getAll/";
+
 
     private static final String format = "json";
 
-    public static URL buildUrl(){
+    public static String getUrlAll() {
+        return COUNTRY_PARTIES_URL;
+    }
+
+    public static String getUrlPlace(String place) {
+        return String.format("%s/place/%s", COUNTRY_PARTIES_URL, place);
+    }
+
+    public static String getUrlDate(String date) {
+        return String.format("%s/date/%s", COUNTRY_PARTIES_URL, date);
+    }
+
+    public static String getUrlDay(String day) {
+        return String.format("%s/day/%s", COUNTRY_PARTIES_URL, day);
+    }
+
+    public static String getUrlMoreInfo(String href) {
+        return String.format("%smoreInfo%s", COUNTRY_PARTIES_MAIN, href);
+    }
+
+
+    public static URL buildUrl() {
         Uri builtUri = Uri.parse(COUNTRY_PARTIES_URL);
 
         URL url = null;
-        try{
+        try {
             url = new URL(builtUri.toString());
-        }catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         Log.v(TAG, "Built URI " + url);
@@ -35,14 +55,14 @@ public class NetworkUtils {
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        try{
+        try {
             InputStream inputStream = urlConnection.getInputStream();
             Scanner scanner = new Scanner(inputStream);
             scanner.useDelimiter("\\A");
-            if(scanner.hasNext()){
+            if (scanner.hasNext()) {
                 return scanner.next();
-            }else return null;
-        }finally {
+            } else return null;
+        } finally {
             urlConnection.disconnect();
         }
     }

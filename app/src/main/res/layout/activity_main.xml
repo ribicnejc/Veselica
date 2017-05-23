@@ -33,14 +33,31 @@
         fab:fab_colorPressed="@color/app_primary_pressed"
         fab:fab_colorRipple="@color/app_ripple" >
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
+            android:id="@+id/menu_item_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_size="mini"
             app:fab_label="Search by place"
-            android:src="@android:drawable/ic_menu_search"
-            fab:fab_size="mini"
-            fab:fab_label="Menu item 1" />
+            android:src="@drawable/icon_search"
+            fab:fab_size="mini"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="Search by place"
+            android:src="@drawable/icon_search"
+            fab:fab_size="mini"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="Search by place"
+            android:src="@drawable/icon_search"
+            fab:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
+
 </RelativeLayout>

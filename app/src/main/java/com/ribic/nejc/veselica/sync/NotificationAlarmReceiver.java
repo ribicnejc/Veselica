@@ -13,6 +13,7 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Broadcast Received");
+        //TODO check if on particular day is any party
         NotificationUtils.remindUserBecauseCharging(context);
     }
 }
