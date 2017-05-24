@@ -26,6 +26,8 @@
 <!--app:layout_scrollFlags="scroll|enterAlways" this was in toolbar-->
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            app:tabIndicatorColor="@android:color/white"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -35,10 +37,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    <!--<include-->
-        <!--layout="@layout/content_main"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
 </android.support.design.widget.CoordinatorLayout>

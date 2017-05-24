@@ -1,11 +1,8 @@
 package com.ribic.nejc.veselica.adapters;
 
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.fragments.PlaceholderFragment;
 
 
@@ -26,7 +23,6 @@ public class SectionPagerAdapter {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
 
