@@ -3,4 +3,7 @@
     <string name="notification_title">Test notification</string>
     <string name="notification_text">Just some notification test</string>
     <string name="notification_big_text">Some big text</string>
+    <string name="page_all">All</string>
+    <string name="page_favorites">Favorites</string>
+    <string name="page_notify">Notify</string>
 </resources>

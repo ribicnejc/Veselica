@@ -1,63 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.ribic.nejc.veselica.ui.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipe_refresh"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_parties"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        fab:fab_colorNormal="@color/app_primary"
-        fab:fab_colorPressed="@color/app_primary_pressed"
-        fab:fab_colorRipple="@color/app_ripple" >
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_size="mini"
-            app:fab_label="Search by place"
-            android:src="@drawable/icon_search"
-            fab:fab_size="mini"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
+<!--android:paddingTop="8dp"-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_size="mini"
-            app:fab_label="Search by place"
-            android:src="@drawable/icon_search"
-            fab:fab_size="mini"/>
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_size="mini"
-            app:fab_label="Search by place"
-            android:src="@drawable/icon_search"
-            fab:fab_size="mini"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        </com.github.clans.fab.FloatingActionMenu>
+        </android.support.v7.widget.Toolbar>
+<!--app:layout_scrollFlags="scroll|enterAlways" this was in toolbar-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <!--<include-->
+        <!--layout="@layout/content_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+</android.support.design.widget.CoordinatorLayout>
