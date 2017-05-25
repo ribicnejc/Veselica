@@ -44,6 +44,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ribic.nejc.veselica.ui.MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="@string/content_authority"
+            android:name="com.ribic.nejc.veselica.data.PartyProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

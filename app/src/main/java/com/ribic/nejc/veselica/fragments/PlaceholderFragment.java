@@ -2,6 +2,7 @@ package com.ribic.nejc.veselica.fragments;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,6 +22,7 @@ import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
 import com.ribic.nejc.veselica.objects.Party;
+import com.ribic.nejc.veselica.ui.DetailActivity;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
 
 import org.json.JSONArray;
@@ -36,11 +38,14 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
      * The fragment argument representing the section number for this
      * fragment.
      */
+    public static final String EXTRA_HREF = "com.nejc.ribic.veselica.href";
     private static final String ARG_SECTION_NUMBER = "section_number";
     public RecyclerView mRecyclerView;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public MainAdapter mMainAdapter;
     public String TAG = PlaceholderFragment.this.getTag();
+
+    public ArrayList<Party> mParties;
 
     public PlaceholderFragment() {
     }
@@ -89,9 +94,9 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
     @Override
     public void partyOnClick(int clickedItemIndex) {
         Toast.makeText(getContext(), "Works", Toast.LENGTH_SHORT).show();
-        //Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        //intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
-        //startActivity(intent);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
+        startActivity(intent);
     }
 
     private class FetchData extends AsyncTask<String, String, ArrayList<Party>> {
@@ -129,7 +134,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_DATE, party.getDate());
                         contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_HREF, party.getHref());
-                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_ID, party.getId());
+                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_ID, Integer.parseInt(party.getId()));
                         contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_NAME, party.getPlace());
                         values.add(contentValues);
                     }
@@ -148,6 +153,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
         protected void onPostExecute(ArrayList<Party> parties) {
             super.onPostExecute(parties);
             mRecyclerView.setVisibility(View.VISIBLE);
+            mParties = parties;
             MainAdapter mMainAdapter = new MainAdapter(parties, PlaceholderFragment.this);
             mRecyclerView.setAdapter(mMainAdapter);
             mSwipeRefreshLayout.setRefreshing(false);
@@ -190,6 +196,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
                 }
                 mMainAdapter = new MainAdapter(parties, PlaceholderFragment.this);
                 mSwipeRefreshLayout.setRefreshing(false);
+                mParties = parties;
                 mRecyclerView.setAdapter(mMainAdapter);
                 super.onPostExecute(cursor);
             }
