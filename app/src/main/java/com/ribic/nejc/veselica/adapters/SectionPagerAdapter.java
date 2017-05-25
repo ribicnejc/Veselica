@@ -23,18 +23,18 @@ public class SectionPagerAdapter {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "a";
+                    return "Main list";
                 case 1:
-                    return "b";
+                    return "Favorites";
                 case 2:
-                    return "c";
+                    return "Others";
             }
             return null;
         }

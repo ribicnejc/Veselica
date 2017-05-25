@@ -8,6 +8,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.SectionPagerAdapter;
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         alarmTime.set(Calendar.MINUTE, 15);
         alarmTime.set(Calendar.HOUR, 6);
         alarmTime.set(Calendar.AM_PM, Calendar.PM);
-        alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+        //alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
 
         // calculate interval (7 days) in ms
 //        int interval2 = 60000;//10s
@@ -63,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
 }
 
 
