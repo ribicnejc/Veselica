@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
@@ -44,7 +45,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public MainAdapter mMainAdapter;
     public String TAG = PlaceholderFragment.this.getTag();
-
+    public TextView mTextViewError;
     public ArrayList<Party> mParties;
 
     public PlaceholderFragment() {
@@ -69,6 +70,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_parties);
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh);
+        mTextViewError = (TextView) rootView.findViewById(R.id.text_view_error);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -86,6 +88,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
             new FetchData().execute();
         } else {
             mSwipeRefreshLayout.setRefreshing(true);
+            Toast.makeText(getContext(), "Will refresh when internet come back", Toast.LENGTH_SHORT).show();
             readDataFromDatabase();
         }
     }

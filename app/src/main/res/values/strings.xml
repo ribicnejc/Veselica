@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Veselica</string>
-    <string name="notification_title">Test notification</string>
+    <string name="notification_title">Today\'s events</string>
     <string name="notification_text">Just some notification test</string>
     <string name="notification_big_text">Some big text</string>
     <string name="page_all">All</string>
@@ -50,6 +50,7 @@
     <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
     <string name="pref_units_imperial" translatable="false">imperial</string>
     <string name="menu_item_settings">Settings</string>
+    <string name="no_internet_connection">No internet connection</string>
 
 
 </resources>

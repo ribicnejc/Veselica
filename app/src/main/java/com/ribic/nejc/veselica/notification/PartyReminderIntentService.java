@@ -1,12 +1,9 @@
-package com.ribic.nejc.veselica.sync;
+package com.ribic.nejc.veselica.notification;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-/**
- * Created by Nejc on 14. 05. 2017.
- */
 
 public class PartyReminderIntentService extends IntentService {
     public PartyReminderIntentService() {
@@ -14,7 +11,7 @@ public class PartyReminderIntentService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
+    protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
         ReminderTask.executeTask(this, action);
     }

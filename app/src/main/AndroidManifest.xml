@@ -25,11 +25,11 @@
         </activity>
 
         <service
-            android:name="com.ribic.nejc.veselica.sync.PartyReminderIntentService"
+            android:name="com.ribic.nejc.veselica.notification.PartyReminderIntentService"
             android:exported="false" />
 
         <receiver
-            android:name="com.ribic.nejc.veselica.sync.NotificationAlarmReceiver"
+            android:name="com.ribic.nejc.veselica.notification.NotificationAlarmReceiver"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -45,11 +45,20 @@
                 android:value="com.ribic.nejc.veselica.ui.MainActivity" />
         </activity>
 
+        <service android:name="com.ribic.nejc.veselica.sync.PartyIntentService"
+            android:exported="false"/>
+
         <provider
             android:authorities="@string/content_authority"
             android:name="com.ribic.nejc.veselica.data.PartyProvider"
             android:exported="false"
             />
+
+        <service android:name="com.ribic.nejc.veselica.sync.PartyJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
     </application>
 
 </manifest>

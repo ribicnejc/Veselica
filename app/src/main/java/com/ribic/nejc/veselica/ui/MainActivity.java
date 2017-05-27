@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set time-part of alarm
         alarmTime.set(Calendar.SECOND, 0);
-        alarmTime.set(Calendar.MINUTE, 15);
+        alarmTime.set(Calendar.MINUTE, 25);
         alarmTime.set(Calendar.HOUR, 6);
         alarmTime.set(Calendar.AM_PM, Calendar.PM);
         //alarmTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);

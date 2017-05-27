@@ -13,8 +13,8 @@ import android.support.v4.content.ContextCompat;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.ui.MainActivity;
-import com.ribic.nejc.veselica.sync.PartyReminderIntentService;
-import com.ribic.nejc.veselica.sync.ReminderTask;
+import com.ribic.nejc.veselica.notification.PartyReminderIntentService;
+import com.ribic.nejc.veselica.notification.ReminderTask;
 
 
 public class NotificationUtils {
@@ -33,7 +33,7 @@ public class NotificationUtils {
 
     private static Bitmap largeIcon(Context context){
         Resources res = context.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.trees);
         return largeIcon;
     }
 
@@ -42,14 +42,14 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    public static void remindUserBecauseCharging(Context context){
+    public static void remindUserForEvents(Context context, String message){
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.margarita)
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.notification_title))
-                .setContentText(context.getString(R.string.notification_text))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notification_big_text)))
+                .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentIntent(contentIntent(context))

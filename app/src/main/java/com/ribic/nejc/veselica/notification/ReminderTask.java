@@ -1,4 +1,4 @@
-package com.ribic.nejc.veselica.sync;
+package com.ribic.nejc.veselica.notification;
 
 import android.content.Context;
 
