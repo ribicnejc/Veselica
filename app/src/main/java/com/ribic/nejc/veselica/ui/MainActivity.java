@@ -12,22 +12,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.SectionPagerAdapter;
+import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.NotificationUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.ButterKnife;
 
-//TODO sync when internet come
-//TODO same as in QuoteSyncJob
-//TODO add real data to notification
 public class MainActivity extends AppCompatActivity {
 
     //public static final String TAG = MainActivity.class.getSimpleName();
     public SectionPagerAdapter.SectionsPagerAdapter mSectionsPagerAdapter;
     public ViewPager mViewPager;
+    public MaterialSearchView mSearchView;
 
     //TODO butterknife
     @Override
@@ -42,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
         alarmMethod();
     }
 
@@ -71,19 +86,31 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.detail, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        mSearchView.setMenuItem(item);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mSearchView.isSearchOpen()) {
+            mSearchView.closeSearch();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
 

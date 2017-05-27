@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PlaceholderFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
+public class MainEventsFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -44,19 +44,19 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
     public RecyclerView mRecyclerView;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public MainAdapter mMainAdapter;
-    public String TAG = PlaceholderFragment.this.getTag();
+    public String TAG = MainEventsFragment.this.getTag();
     public TextView mTextViewError;
     public ArrayList<Party> mParties;
 
-    public PlaceholderFragment() {
+    public MainEventsFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public PlaceholderFragment newInstance(int sectionNumber) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
+    public MainEventsFragment newInstance(int sectionNumber) {
+        MainEventsFragment fragment = new MainEventsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -157,7 +157,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
             super.onPostExecute(parties);
             mRecyclerView.setVisibility(View.VISIBLE);
             mParties = parties;
-            MainAdapter mMainAdapter = new MainAdapter(parties, PlaceholderFragment.this);
+            MainAdapter mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
             mRecyclerView.setAdapter(mMainAdapter);
             mSwipeRefreshLayout.setRefreshing(false);
         }
@@ -197,7 +197,7 @@ public class PlaceholderFragment extends Fragment implements MainAdapter.MainAda
                         parties.add(party);
                     } while (cursor.moveToNext());
                 }
-                mMainAdapter = new MainAdapter(parties, PlaceholderFragment.this);
+                mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
                 mSwipeRefreshLayout.setRefreshing(false);
                 mParties = parties;
                 mRecyclerView.setAdapter(mMainAdapter);

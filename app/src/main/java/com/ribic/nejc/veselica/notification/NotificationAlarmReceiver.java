@@ -4,13 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
-import com.ribic.nejc.veselica.fragments.PlaceholderFragment;
-import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.NotificationUtils;
 
 import java.text.DateFormat;

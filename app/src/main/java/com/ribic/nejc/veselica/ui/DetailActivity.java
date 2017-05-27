@@ -3,7 +3,6 @@ package com.ribic.nejc.veselica.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,16 +11,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ribic.nejc.party.R;
-import com.ribic.nejc.veselica.fragments.PlaceholderFragment;
+import com.ribic.nejc.veselica.fragments.MainEventsFragment;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public final String TAG = "nejc";//DetailActivity.this.getLocalClassName();
+    public final String TAG = "nejc";//DetailActivity.this.getSimpleName();
     public TextView mTextViewTitle;
     public TextView mTextViewDate;
     public TextView mTextViewLocation;
@@ -33,7 +30,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        String href = getIntent().getStringExtra(PlaceholderFragment.EXTRA_HREF);
+        String href = getIntent().getStringExtra(MainEventsFragment.EXTRA_HREF);
         mTextViewTitle = (TextView) findViewById(R.id.text_view_title);
         mTextViewDate = (TextView) findViewById(R.id.text_view_date);
         mTextViewActors = (TextView) findViewById(R.id.text_view_actors);
