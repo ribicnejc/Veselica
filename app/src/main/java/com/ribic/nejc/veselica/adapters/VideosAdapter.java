@@ -1,4 +1,4 @@
-package com.ribic.nejc.veselica;
+package com.ribic.nejc.veselica.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

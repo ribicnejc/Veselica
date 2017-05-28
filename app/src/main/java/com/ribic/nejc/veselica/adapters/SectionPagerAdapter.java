@@ -3,6 +3,8 @@ package com.ribic.nejc.veselica.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.ribic.nejc.veselica.fragments.FavoriteEventsFragment;
 import com.ribic.nejc.veselica.fragments.MainEventsFragment;
 
 
@@ -17,8 +19,10 @@ public class SectionPagerAdapter {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a MainEventsFragment (defined as a static inner class below).
-            //TODO if position is favorites, call new fragment
-            return new MainEventsFragment().newInstance(position + 1);
+            if (position == 1) {
+                return new FavoriteEventsFragment().newInstance(position + 1);
+            } else
+                return new MainEventsFragment().newInstance(position + 1);
         }
 
         @Override

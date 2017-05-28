@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ribic.nejc.party.R;
-import com.ribic.nejc.veselica.VideosAdapter;
+import com.ribic.nejc.veselica.adapters.VideosAdapter;
 import com.ribic.nejc.veselica.fragments.MainEventsFragment;
 import com.ribic.nejc.veselica.objects.Video;
 import com.ribic.nejc.veselica.utils.NetworkUtils;

@@ -197,6 +197,7 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                         parties.add(party);
                     } while (cursor.moveToNext());
                 }
+                cursor.close();
                 mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
                 mSwipeRefreshLayout.setRefreshing(false);
                 mParties = parties;
