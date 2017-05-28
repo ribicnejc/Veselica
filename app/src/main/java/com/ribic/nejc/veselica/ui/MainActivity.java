@@ -15,22 +15,18 @@ import android.view.MenuItem;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.SectionPagerAdapter;
-import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.NotificationUtils;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public static final String TAG = MainActivity.class.getSimpleName();
     public SectionPagerAdapter.SectionsPagerAdapter mSectionsPagerAdapter;
     public ViewPager mViewPager;
     public MaterialSearchView mSearchView;
 
-    //TODO butterknife
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -39,7 +39,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideoViewH
 
     @Override
     public void onBindViewHolder(VideoViewHolder holder, int position) {
-        String imgUrl = mVideos.get(position).getVideoUrl();
+        String imgUrl = mVideos.get(position).getImgUrl();
         Glide.with(holder.itemView.getContext()).load(imgUrl).into(holder.mVideoImage);
         holder.mVideoTitle.setText(mVideos.get(position).getTitle());
     }

@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class NetworkUtils {
+public final class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
     private static final String COUNTRY_PARTIES_MAIN = "http://dev.nejcribic.com/veselice_api/myApi.php?";
     private static final String COUNTRY_PARTIES_URL = COUNTRY_PARTIES_MAIN + "getAll/";

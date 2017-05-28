@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="sans-serif-light"
-        android:text="@string/no_internet_connection"
+        android:text="@string/no_data_availabe_to_show"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:visibility="gone" />

@@ -1,11 +1,15 @@
 package com.ribic.nejc.veselica.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,8 +20,10 @@ import com.android.volley.toolbox.Volley;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.VideosAdapter;
 import com.ribic.nejc.veselica.fragments.MainEventsFragment;
+import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.objects.Video;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
+import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,11 +41,17 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public ArrayList<Video> mVideos;
     public RecyclerView mRecyclerView;
     public VideosAdapter mAdapter;
+    public Party party = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        if (!getIntent().hasExtra(MainEventsFragment.EXTRA_HREF)){
+            return;
+        }
+
         String href = getIntent().getStringExtra(MainEventsFragment.EXTRA_HREF);
         mTextViewDate = (TextView) findViewById(R.id.text_view_date);
         mTextViewActors = (TextView) findViewById(R.id.text_view_actors);
@@ -56,7 +68,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         fetchData(href);
     }
 
-    private void fetchData(String href){
+    private void fetchData(final String href){
         String url = NetworkUtils.getUrlMoreInfo(href);
         final RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -74,6 +86,10 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                             String region = response.getString("region");
                             String about = response.getString("about");
                             setTitle(title);
+                            //TODO fix api to show id in more info
+                            //TODO remove Veselica: pred title etc
+                            party = new Party(date, title, href, "tmp");
+
                             mTextViewDate.setText(date);
                             mTextViewActors.setText(actors);
                             mTextViewLocation.setText(location);
@@ -84,7 +100,8 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String thumb = jsonObject.getString("thumbnail_url");
                                 String videoTitle = jsonObject.getString("title");
-                                Video video = new Video(videoTitle, thumb);
+                                String youtube = jsonObject.getString("html");
+                                Video video = new Video(videoTitle, thumb, youtube);
                                 mVideos.add(video);
                             }
                         }catch (Exception e){
@@ -105,6 +122,18 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
     @Override
     public void trailersOnClick(int clickedItemIndex) {
+        String MAIN_YOUTUBE = mVideos.get(clickedItemIndex).getVideoUrl();
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MAIN_YOUTUBE));
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+        Toast.makeText(this, mVideos.get(clickedItemIndex).getVideoUrl(), Toast.LENGTH_SHORT).show();
+    }
 
+    public void favoriteEvent(View view) {
+        if (party != null){
+            //TODO check if its marked and make heart and other stuff
+            PrefUtils.saveName(party.toString(), this);
+        }
     }
 }

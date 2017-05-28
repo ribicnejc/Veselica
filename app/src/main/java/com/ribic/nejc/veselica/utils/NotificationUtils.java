@@ -17,7 +17,7 @@ import com.ribic.nejc.veselica.notification.PartyReminderIntentService;
 import com.ribic.nejc.veselica.notification.ReminderTask;
 
 
-public class NotificationUtils {
+public final class NotificationUtils {
     public static final int PARTY_REMINDER_INTENT_ID = 443;
     public static final int ACTION_IGNORE_PENDING_INTENT_ID = 3434;
     public static final int ACTION_APPROVE_PENDING_INTENT_ID = 3343434;

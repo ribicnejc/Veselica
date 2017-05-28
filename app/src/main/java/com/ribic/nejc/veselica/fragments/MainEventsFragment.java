@@ -155,6 +155,9 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
         @Override
         protected void onPostExecute(ArrayList<Party> parties) {
             super.onPostExecute(parties);
+//            if (parties.size() == 0){
+//                mTextViewError.setText(getContext().getString(R.string.no_data_availabe_to_show));
+//            }
             mRecyclerView.setVisibility(View.VISIBLE);
             mParties = parties;
             MainAdapter mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);

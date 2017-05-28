@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/image_view_item_thumbnail"
-            android:layout_width="130dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
             tools:src="@drawable/to_delete_thumbnail" />
@@ -29,6 +29,7 @@
             android:layout_toEndOf="@id/image_view_item_thumbnail"
             android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:padding="5dp"
             tools:text="Ansambel Gadi - Tebe čakam" />
 
     </RelativeLayout>

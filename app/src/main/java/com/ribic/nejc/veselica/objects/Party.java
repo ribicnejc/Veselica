@@ -46,4 +46,9 @@ public class Party {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s@%s@%s@%s", this.date, this.place, this.href, this.id);
+    }
 }

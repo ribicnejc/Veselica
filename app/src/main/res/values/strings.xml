@@ -53,4 +53,8 @@
     <string name="no_internet_connection">No internet connection</string>
 
 
+
+    <string name="pref_favorite_names_key" translatable="false">pref_favorite_names_key</string>
+    <string name="no_data_availabe_to_show">No data available right now, please refresh or wait to internet</string>
+
 </resources>

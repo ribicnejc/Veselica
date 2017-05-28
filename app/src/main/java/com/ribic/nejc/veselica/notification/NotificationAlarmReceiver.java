@@ -90,7 +90,12 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
             } while (cursor.moveToNext());
         }
 
-        return parties.toString();
+        String msg = "";
+        for (String elt : parties){
+            msg += elt + "\n\n";
+        }
+
+        return msg;
     }
 
 }
