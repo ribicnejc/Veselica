@@ -21,7 +21,9 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Broadcast Received, notification is setting up");
-        NotificationUtils.remindUserForEvents(context, getMessage(context));
+        String msg = getMessage(context);
+        if (!msg.equals(""))
+            NotificationUtils.remindUserForEvents(context, msg);
     }
 
 
@@ -31,7 +33,7 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
         Date date = new Date();
         String sDate = dateFormat.format(date);
         String[] parts = sDate.split(" ");
-        String month = "";
+        String month;
         switch (parts[1]){
             case "01":
                 month = "januar";
@@ -81,14 +83,15 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
         if (cursor.moveToFirst()) {
             do {
                 String date2 = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_DATE));
-                String href = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_HREF));
-                String id = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_ID));
+                //String href = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_HREF));
+                //String id = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_ID));
                 String name = cursor.getString(cursor.getColumnIndex(PartyContract.PartyEntry.COLUMN_PARTY_NAME));
                 if (todayDate.equals(date2.split(", ")[1])){
                     parties.add(name + "\n");
                 }
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         String msg = "";
         for (String elt : parties){

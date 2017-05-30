@@ -1,13 +1,11 @@
 package com.ribic.nejc.veselica.fragments;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,9 +14,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
@@ -29,7 +34,6 @@ import com.ribic.nejc.veselica.utils.NetworkUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +51,7 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
     public String TAG = MainEventsFragment.this.getTag();
     public TextView mTextViewError;
     public ArrayList<Party> mParties;
+    public Snackbar mSnackbar;
 
     public MainEventsFragment() {
     }
@@ -77,18 +82,23 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         mRecyclerView.setLayoutManager(layoutManager);
+
+        mSnackbar = Snackbar.make(container, "No internet connection", Snackbar.LENGTH_LONG);
+
+
         onRefresh();
         return rootView;
     }
 
     @Override
     public void onRefresh() {
-        if (networkUp()) {
+        if (NetworkUtils.networkUp(getContext())) {
             mSwipeRefreshLayout.setRefreshing(true);
-            new FetchData().execute();
+            fetchData();
         } else {
             mSwipeRefreshLayout.setRefreshing(true);
             Toast.makeText(getContext(), "Will refresh when internet come back", Toast.LENGTH_SHORT).show();
+            //mSnackbar.show();
             readDataFromDatabase();
         }
     }
@@ -101,68 +111,69 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
         startActivity(intent);
     }
 
-    private class FetchData extends AsyncTask<String, String, ArrayList<Party>> {
 
-        @Override
-        protected void onPreExecute() {
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            super.onPreExecute();
-        }
+    private void fetchData() {
+        String url = NetworkUtils.getUrlAll();
+        RequestQueue queue = Volley.newRequestQueue(getContext());
 
-        @Override
-        protected ArrayList<Party> doInBackground(String... strings) {
-            URL url = NetworkUtils.buildUrl();
-            ArrayList<Party> parties = new ArrayList<>();
-            List<ContentValues> values = new ArrayList<>();
-            try {
-                String result = NetworkUtils.getResponseFromHttpUrl(url);
-                JSONArray jsonArray = new JSONArray(result);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String date = jsonObject.getString("date");
-                    JSONArray jsonArray1 = jsonObject.getJSONArray("places");
-                    for (int j = 0; j < jsonArray1.length(); j++) {
-                        JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
-                        String name = jsonObject1.getString("name");
-                        String href = jsonObject1.getString("href");
-                        String id = jsonObject1.getString("id");
-                        Party party = new Party();
-                        party.setPlace(name);
-                        party.setHref(href);
-                        party.setDate(date);
-                        party.setId(id);
-                        parties.add(party);
+        //mRecyclerView.setVisibility(View.INVISIBLE);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                ArrayList<Party> parties = new ArrayList<>();
+                List<ContentValues> values = new ArrayList<>();
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        String date = jsonObject.getString("date");
+                        JSONArray jsonArray1 = jsonObject.getJSONArray("places");
+                        for (int j = 0; j < jsonArray1.length(); j++) {
+                            JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
+                            String name = jsonObject1.getString("name");
+                            String href = jsonObject1.getString("href");
+                            String id = jsonObject1.getString("id");
+                            Party party = new Party();
+                            party.setPlace(name);
+                            party.setHref(href);
+                            party.setDate(date);
+                            party.setId(id);
+                            parties.add(party);
 
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_DATE, party.getDate());
-                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_HREF, party.getHref());
-                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_ID, Integer.parseInt(party.getId()));
-                        contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_NAME, party.getPlace());
-                        values.add(contentValues);
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_DATE, party.getDate());
+                            contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_HREF, party.getHref());
+                            contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_ID, Integer.parseInt(party.getId()));
+                            contentValues.put(PartyContract.PartyEntry.COLUMN_PARTY_NAME, party.getPlace());
+                            values.add(contentValues);
+                        }
                     }
+                    getContext().getContentResolver().bulkInsert(PartyContract.PartyEntry.CONTENT_URI,
+                            values.toArray(new ContentValues[values.size()]));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.v(TAG, "problem appeared when parsing JSON");
                 }
-                getContext().getContentResolver().bulkInsert(PartyContract.PartyEntry.CONTENT_URI,
-                        values.toArray(new ContentValues[values.size()]));
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.v(TAG, "problem appeared when parsing JSON");
-            }
-            Log.v(TAG, "result get from internet");
-            return parties;
-        }
 
-        @Override
-        protected void onPostExecute(ArrayList<Party> parties) {
-            super.onPostExecute(parties);
-//            if (parties.size() == 0){
-//                mTextViewError.setText(getContext().getString(R.string.no_data_availabe_to_show));
-//            }
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mParties = parties;
-            MainAdapter mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
-            mRecyclerView.setAdapter(mMainAdapter);
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
+
+                if (parties.size() != 0) {
+                    //mRecyclerView.setVisibility(View.VISIBLE);
+                    mParties = parties;
+                    mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
+                    mRecyclerView.setAdapter(mMainAdapter);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    //TODO animate data afterwords
+                }
+
+                Log.v(TAG, "Volley JsonArray data parsed and saved to database");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                //TODO show error
+            }
+        });
+        queue.add(jsonArrayRequest);
     }
 
     public void readDataFromDatabase() {
@@ -209,10 +220,5 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
         }.execute();
     }
 
-    private boolean networkUp() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnectedOrConnecting();
-    }
+
 }
