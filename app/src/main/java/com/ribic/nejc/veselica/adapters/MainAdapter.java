@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
+import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
     public void onBindViewHolder(MainAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
+        if (mParties.get(position) != null){
+            Party party = mParties.get(position);
+            if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext()))
+                holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
+            else
+                holder.mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
+        }
+
     }
 
     @Override
@@ -49,11 +59,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
         private TextView mTextViewDate;
         private TextView mTextViewParty;
+        private ImageView mImageViewFavorite;
 
         private MainAdapterViewHolder(View itemView) {
             super(itemView);
             mTextViewDate = (TextView) itemView.findViewById(R.id.tv_party_date);
             mTextViewParty = (TextView) itemView.findViewById(R.id.tv_party_name);
+            mImageViewFavorite = (ImageView) itemView.findViewById(R.id.image_view_icon_favorite);
             itemView.setOnClickListener(this);
         }
 

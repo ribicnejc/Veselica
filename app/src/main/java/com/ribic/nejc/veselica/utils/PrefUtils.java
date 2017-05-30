@@ -17,8 +17,7 @@ public final class PrefUtils {
     public static Set<String> getNames(Context context){
         String namesKey = context.getString(R.string.pref_favorite_names_key);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Set<String> set = prefs.getStringSet(namesKey, new HashSet<String>());
-        return set;
+        return prefs.getStringSet(namesKey, new HashSet<String>());
     }
 
     public static void saveNames(Set<String> elts, Context context){
@@ -27,6 +26,9 @@ public final class PrefUtils {
         String namesKey = context.getString(R.string.pref_favorite_names_key);
         Set<String> set = new HashSet<>();
         set.addAll(elts);
+        editor.remove(namesKey);
+        editor.apply();
+//        editor.clear();
         editor.putStringSet(namesKey, set);
         editor.apply();
     }
@@ -34,6 +36,17 @@ public final class PrefUtils {
     public static void saveName(String name, Context context){
         Set<String> tmp = getNames(context);
         tmp.add(name);
+        saveNames(tmp, context);
+    }
+
+    public static boolean exitsts(String name, Context context){
+        Set<String> set = getNames(context);
+        return set.contains(name);
+    }
+
+    public static void remove(String name, Context context){
+        Set<String> tmp = getNames(context);
+        tmp.remove(name);
         saveNames(tmp, context);
     }
 }

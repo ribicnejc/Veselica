@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 public class DetailActivity extends AppCompatActivity implements VideosAdapter.TrailersAdapterOnClickHandler{
 
     public final String TAG = "nejc";//DetailActivity.this.getSimpleName();
@@ -41,6 +46,10 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public ArrayList<Video> mVideos;
     public RecyclerView mRecyclerView;
     public VideosAdapter mAdapter;
+    public LinearLayout mLayout;
+    public ProgressBar mProgressBarMain;
+    public ProgressBar mProgressBarVideos;
+    public ImageView mImageViewFavorite;
     public Party party = null;
 
     @Override
@@ -59,22 +68,39 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         mTextViewAbout = (TextView) findViewById(R.id.text_view_about);
         mTextViewRegion = (TextView) findViewById(R.id.text_view_region);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_item);
+        mLayout = (LinearLayout) findViewById(R.id.linear_layout_detail);
+        mProgressBarMain = (ProgressBar) findViewById(R.id.progress_bar_main);
+        mProgressBarVideos = (ProgressBar) findViewById(R.id.progress_bar_videos);
+        mImageViewFavorite = (ImageView) findViewById(R.id.image_view_favorite);
+        mLayout.setVisibility(GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         mRecyclerView.setLayoutManager(layoutManager);
 
+
         fetchData(href);
     }
 
+    private void checkFavorite(){
+        if (party != null){
+            if (PrefUtils.exitsts(party.toString(), this))
+                mImageViewFavorite.setImageResource(R.drawable.icon_stared);
+            else
+                mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
+        }
+    }
+
     private void fetchData(final String href){
+        mProgressBarMain.setVisibility(View.VISIBLE);
+        mProgressBarVideos.setVisibility(View.VISIBLE);
+        mLayout.setVisibility(GONE);
         String url = NetworkUtils.getUrlMoreInfo(href);
         final RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(JSONObject response) {
                         mVideos = new ArrayList<>();
@@ -85,10 +111,10 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                             String location = response.getString("location");
                             String region = response.getString("region");
                             String about = response.getString("about");
+                            String id = response.getInt("id") + "";
                             setTitle(title);
-                            //TODO fix api to show id in more info
-                            //TODO remove Veselica: pred title etc
-                            party = new Party(date, title, href, "tmp");
+                            String tit = title.split(": ")[1];
+                            party = new Party(date, tit, href, id);
 
                             mTextViewDate.setText(date);
                             mTextViewActors.setText(actors);
@@ -109,6 +135,10 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                         }
                         mAdapter = new VideosAdapter(mVideos, DetailActivity.this);
                         mRecyclerView.setAdapter(mAdapter);
+                        mProgressBarMain.setVisibility(GONE);
+                        mLayout.setVisibility(View.VISIBLE);
+                        mProgressBarVideos.setVisibility(GONE);
+                        checkFavorite();
                     }
                 }, new Response.ErrorListener() {
 
@@ -132,8 +162,14 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
     public void favoriteEvent(View view) {
         if (party != null){
-            //TODO check if its marked and make heart and other stuff
-            PrefUtils.saveName(party.toString(), this);
+
+            if (PrefUtils.exitsts(party.toString(), this)){
+                PrefUtils.remove(party.toString(), this);
+                mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
+            }else{
+                PrefUtils.saveName(party.toString(), this);
+                mImageViewFavorite.setImageResource(R.drawable.icon_stared);
+            }
         }
     }
 }

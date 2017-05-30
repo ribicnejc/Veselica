@@ -56,5 +56,7 @@
 
     <string name="pref_favorite_names_key" translatable="false">pref_favorite_names_key</string>
     <string name="no_data_availabe_to_show">No data available right now, please refresh or wait to internet</string>
+    <string name="no_favorites_events">No favorites events saved yet</string>
+    <string name="no_videos_for_this_event">No videos for this event</string>
 
 </resources>

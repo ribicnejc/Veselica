@@ -1,26 +1,37 @@
 package com.ribic.nejc.veselica.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.objects.Party;
+import com.ribic.nejc.veselica.ui.DetailActivity;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.Set;
 
-public class FavoriteEventsFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler{
+import static com.ribic.nejc.veselica.fragments.MainEventsFragment.EXTRA_HREF;
+
+public class FavoriteEventsFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     public RecyclerView mRecyclerView;
     public MainAdapter mAdapter;
     public ArrayList<Party> mParties;
+    public SwipeRefreshLayout mSwipeRefreshLayout;
+    public TextView mTextViewError;
+
     public FavoriteEventsFragment() {
     }
 
@@ -40,20 +51,42 @@ public class FavoriteEventsFragment extends Fragment implements MainAdapter.Main
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorite, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_favorites);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_favorites);
+        mTextViewError = (TextView) rootView.findViewById(R.id.text_view_error_favorite);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         mRecyclerView.setLayoutManager(layoutManager);
-        readData();
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                Party party = mParties.remove(viewHolder.getAdapterPosition());
+                PrefUtils.remove(party.toString(), getContext());
+                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                checkIfEmpty();
+                //TODO notify all data even on the other fragment
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
+
+
+        onRefresh();
         return rootView;
     }
 
-    public void readData(){
+    public void readData() {
+        mSwipeRefreshLayout.setRefreshing(true);
         ArrayList<Party> elts = new ArrayList<>();
         Set<String> tmp = PrefUtils.getNames(getContext());
-        for (String elt : tmp){
+        for (String elt : tmp) {
             String[] tmp2 = elt.split("@");
-            //this.date, this.place, this.href, this.id
             String date = tmp2[0];
             String place = tmp2[1];
             String href = tmp2[2];
@@ -61,14 +94,33 @@ public class FavoriteEventsFragment extends Fragment implements MainAdapter.Main
             Party party = new Party(date, place, href, id);
             elts.add(party);
         }
+        mParties = elts;
+
+        checkIfEmpty();
 
         mAdapter = new MainAdapter(elts, this);
         mRecyclerView.setAdapter(mAdapter);
+        mSwipeRefreshLayout.setRefreshing(false);
 
     }
 
     @Override
     public void partyOnClick(int clickedItemIndex) {
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        readData();
+    }
+
+
+    private void checkIfEmpty() {
+        if (mParties.size() == 0) {
+            mTextViewError.setVisibility(View.VISIBLE);
+        } else mTextViewError.setVisibility(View.GONE);
 
     }
 }

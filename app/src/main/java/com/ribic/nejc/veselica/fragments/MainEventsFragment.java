@@ -96,7 +96,6 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
 
     @Override
     public void partyOnClick(int clickedItemIndex) {
-        Toast.makeText(getContext(), "Works", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
         startActivity(intent);
