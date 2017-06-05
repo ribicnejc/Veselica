@@ -56,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        alarmMethod();
+        defaultAlarmNotification();
+        favoriteEventsAlarm();
     }
 
-    private void alarmMethod() {
-        //TODO give option for particular party in settings
-        Intent intent = new Intent("com.ribic.nejc.veselica.PUSH_NOTIFICATION");
+    private void defaultAlarmNotification() {
+        Intent intent = new Intent(NotificationUtils.ACTION_ALL_NOTIFICATION_ALARM);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), NotificationUtils.PARTY_REMINDER_INTENT_ID, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         // setup time for alarm
@@ -76,6 +76,19 @@ public class MainActivity extends AppCompatActivity {
 
         // calculate interval (7 days) in ms
 //        int interval2 = 60000;//10s
+        int interval = 1000 * 60 * 60 * 24;// * 7;
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
+    }
+
+    private void favoriteEventsAlarm(){
+        Intent intent = new Intent(NotificationUtils.ACTION_FAVORITE_NOTIFICATION_ALARM);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), NotificationUtils.PARTY_REMINDER_INTENT_ID, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar alarmTime = Calendar.getInstance();
+        alarmTime.set(Calendar.SECOND, 0);
+        alarmTime.set(Calendar.MINUTE, 10);
+        alarmTime.set(Calendar.HOUR, 4);
+        alarmTime.set(Calendar.AM_PM, Calendar.PM);
         int interval = 1000 * 60 * 60 * 24;// * 7;
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
     }

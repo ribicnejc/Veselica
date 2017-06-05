@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterViewHolder> {
     private ArrayList<Party> mParties;
@@ -47,6 +50,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
             else
                 holder.mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
         }
+        setAnimation(holder.itemView, position);
 
     }
 
@@ -73,6 +77,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         public void onClick(View view) {
             int position = getAdapterPosition();
             mClickHandler.partyOnClick(position);
+        }
+    }
+    private int lastPosition = -1;
+
+
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            anim.setDuration(100);//to make duration random number between [0,501)
+            viewToAnimate.startAnimation(anim);
+            lastPosition = position;
         }
     }
 

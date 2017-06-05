@@ -4,113 +4,145 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:id="@+id/linear_layout_detail"
-        android:visibility="visible"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.ribic.nejc.veselica.ui.DetailActivity">
+        android:layout_height="match_parent">
 
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/linear_layout_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="12">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:context="com.ribic.nejc.veselica.ui.DetailActivity">
 
-            <TextView
-                android:id="@+id/text_view_location"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:padding="10dp"
-                android:textColor="@android:color/black"
-                android:textSize="25sp"
-                tools:text="Ježica, Ljubljana" />
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:weightSum="12">
 
-            <ImageView
-                android:id="@+id/image_view_favorite"
+                <TextView
+                    android:id="@+id/text_view_actors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="10dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp"
+                    tools:text="Skupina Gadi" />
+
+
+                <ImageView
+                    android:id="@+id/image_view_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="9"
+                    android:onClick="favoriteEvent"
+                    android:src="@drawable/icon_favorite" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="9"
-                android:onClick="favoriteEvent"
-                android:src="@drawable/icon_favorite" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    tools:text="Ježica, Ljubljana" />
+
+                <TextView
+                    android:id="@+id/text_view_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    tools:text="Sobota, 27. maj 2017" />
 
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/text_view_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    tools:text="Regija: Ljubljanska [Več iz te regije] " />
 
-        <TextView
-            android:id="@+id/text_view_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            tools:text="Sobota, 27. maj 2017" />
-
-
-        <TextView
-            android:id="@+id/text_view_region"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            tools:text=" Regija: Ljubljanska [Več iz te regije] " />
-
-        <TextView
-            android:id="@+id/text_view_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            tools:text=" PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali vas bodo fantje s skupine Gadi. Veselica bo pod velikim šotorom, za hrano in pijačo pa bomo poskrbeli gasilci PGD Ježica. V neposredni bližini prireditvenega šotora bo zagotovljeno parkirišče. LEPO VABLJENI! " />
-
-        <TextView
-            android:id="@+id/text_view_actors"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            tools:text="Skupina Gadi" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:elevation="5dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="15dp"
-                android:visibility="visible">
-
-            </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/text_view_error_detail_no_videos"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/no_videos_for_this_event"
-                android:textSize="15sp"
-                android:visibility="gone" />
+                android:text="Opis:"
+                android:textSize="18sp" />
 
-            <ProgressBar
-                android:id="@+id/progress_bar_videos"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="gone" />
+            <TextView
+                android:id="@+id/text_view_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorGray"
+                android:textSize="17sp"
+                tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali vas bodo fantje s skupine Gadi. Veselica bo pod velikim šotorom, za hrano in pijačo pa bomo poskrbeli gasilci PGD Ježica. V neposredni bližini prireditvenega šotora bo zagotovljeno parkirišče. LEPO VABLJENI! " />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:visibility="visible">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/text_view_error_detail_no_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/no_videos_for_this_event"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_videos"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/progress_bar_main"

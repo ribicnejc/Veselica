@@ -15,8 +15,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.ribic.nejc.veselica.ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,30 +34,33 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="com.ribic.nejc.veselica.PUSH_NOTIFICATION" />
+                <action android:name="com.ribic.nejc.veselica.PUSH_NOTIFICATION_FAVORITE" />
             </intent-filter>
         </receiver>
 
         <activity android:name="com.ribic.nejc.veselica.ui.SettingsActivity" />
-        <activity android:name="com.ribic.nejc.veselica.ui.DetailActivity"
+        <activity
+            android:name="com.ribic.nejc.veselica.ui.DetailActivity"
             android:parentActivityName="com.ribic.nejc.veselica.ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ribic.nejc.veselica.ui.MainActivity" />
         </activity>
 
-        <service android:name="com.ribic.nejc.veselica.sync.PartyIntentService"
-            android:exported="false"/>
+        <service
+            android:name="com.ribic.nejc.veselica.sync.PartyIntentService"
+            android:exported="false" />
 
         <provider
-            android:authorities="@string/content_authority"
             android:name="com.ribic.nejc.veselica.data.PartyProvider"
-            android:exported="false"
-            />
+            android:authorities="@string/content_authority"
+            android:exported="false" />
 
-        <service android:name="com.ribic.nejc.veselica.sync.PartyJobService"
+        <service
+            android:name="com.ribic.nejc.veselica.sync.PartyJobService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
     </application>
 

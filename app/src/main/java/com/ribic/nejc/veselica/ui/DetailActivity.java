@@ -43,6 +43,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public TextView mTextViewRegion;
     public TextView mTextViewActors;
     public TextView mTextViewAbout;
+    public TextView mTextViewError;
     public ArrayList<Video> mVideos;
     public RecyclerView mRecyclerView;
     public VideosAdapter mAdapter;
@@ -72,6 +73,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         mProgressBarMain = (ProgressBar) findViewById(R.id.progress_bar_main);
         mProgressBarVideos = (ProgressBar) findViewById(R.id.progress_bar_videos);
         mImageViewFavorite = (ImageView) findViewById(R.id.image_view_favorite);
+        mTextViewError = (TextView) findViewById(R.id.text_view_error_detail_no_videos);
         mLayout.setVisibility(GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -139,6 +141,9 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                         mLayout.setVisibility(View.VISIBLE);
                         mProgressBarVideos.setVisibility(GONE);
                         checkFavorite();
+                        if (mVideos.size() == 0){
+                            mTextViewError.setVisibility(View.VISIBLE);
+                        }else mTextViewError.setVisibility(View.INVISIBLE);
                     }
                 }, new Response.ErrorListener() {
 
@@ -169,6 +174,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
             }else{
                 PrefUtils.saveName(party.toString(), this);
                 mImageViewFavorite.setImageResource(R.drawable.icon_stared);
+                Toast.makeText(this, R.string.toast_notify_event_when_favorited, Toast.LENGTH_SHORT).show();
             }
         }
     }

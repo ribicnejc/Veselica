@@ -7,6 +7,7 @@
     <color name="colorFavoriteRed">#F44336</color>
     <color name="colorFavoriteOrange">#FF5722</color>
     <color name="colorYellow">#FFB300</color>
+    <color name="colorGray">#374046</color>
 
     <color name="colorRippleColor">@color/colorPrimary</color>
     <color name="colorFavorite">@color/colorYellow</color>

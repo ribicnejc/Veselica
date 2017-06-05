@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Veselica</string>
     <string name="notification_title">Today\'s events</string>
+    <string name="notification_title_favorite">Favorite event reminder</string>
     <string name="notification_text">Just some notification test</string>
     <string name="notification_big_text">Some big text</string>
     <string name="page_all">All</string>
@@ -58,5 +59,6 @@
     <string name="no_data_availabe_to_show">No data available right now, please refresh or wait to internet</string>
     <string name="no_favorites_events">No favorites events saved yet</string>
     <string name="no_videos_for_this_event">No videos for this event</string>
+    <string name="toast_notify_event_when_favorited">You will be notified about event</string>
 
 </resources>
