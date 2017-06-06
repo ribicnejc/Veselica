@@ -97,8 +97,13 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
             fetchData();
         } else {
             mSwipeRefreshLayout.setRefreshing(true);
-            Toast.makeText(getContext(), "Will refresh when internet come back", Toast.LENGTH_SHORT).show();
-            //mSnackbar.show();
+            mSnackbar.setAction(R.string.try_again, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRefresh();
+                }
+            });
+            mSnackbar.show();
             readDataFromDatabase();
         }
     }

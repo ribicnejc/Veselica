@@ -49,4 +49,10 @@ public final class PrefUtils {
         tmp.remove(name);
         saveNames(tmp, context);
     }
+
+    public static boolean notificationsEnabled(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String key = context.getString(R.string.pref_notification_key);
+        return prefs.getBoolean(key, true);
+    }
 }

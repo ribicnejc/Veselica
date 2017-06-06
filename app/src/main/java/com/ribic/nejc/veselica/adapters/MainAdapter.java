@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
@@ -40,7 +41,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
     }
 
     @Override
-    public void onBindViewHolder(MainAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(final MainAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
         if (mParties.get(position) != null){
@@ -50,6 +51,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
             else
                 holder.mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
         }
+        final Party party = mParties.get(position);
+        holder.mImageViewFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext())){
+                    PrefUtils.remove(party.toString(), holder.itemView.getContext());
+                    holder.mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
+                }else{
+                    PrefUtils.saveName(party.toString(), holder.itemView.getContext());
+                    holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
+                    }
+            }
+        });
         setAnimation(holder.itemView, position);
 
     }
@@ -91,6 +105,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
             lastPosition = position;
         }
     }
+
 
 
 }

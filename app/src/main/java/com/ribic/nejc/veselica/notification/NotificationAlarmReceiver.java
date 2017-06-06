@@ -23,6 +23,9 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Broadcast Received, notification is setting up");
+
+        if (!PrefUtils.notificationsEnabled(context)) return;
+
         if (intent.getAction().equals(NotificationUtils.ACTION_FAVORITE_NOTIFICATION_ALARM)) {
             String msg = getMessageFavorites(context);
             if (!msg.equals(""))
