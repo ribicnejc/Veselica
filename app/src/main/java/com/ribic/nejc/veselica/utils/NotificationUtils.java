@@ -50,7 +50,7 @@ public final class NotificationUtils {
 
     public static void remindUserForEvents(Context context, String message){
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                //.setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.trees)
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.notification_title))
@@ -70,7 +70,7 @@ public final class NotificationUtils {
 
     public static void remindUserForFavoriteEvent(Context context, String message){
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+               // .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.icon_stared)
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.notification_title_favorite))

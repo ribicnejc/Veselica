@@ -129,6 +129,7 @@ public class NotificationAlarmReceiver extends BroadcastReceiver {
         }
         if (parts[0].split("")[1].equals("0")) {
             parts[0] = parts[0].substring(1);
+            parts[0] = " " + parts[0];
         }
         return String.format("%s %s %s", parts[0], month, parts[2]);
     }

@@ -29,6 +29,7 @@ import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.ui.DetailActivity;
+import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.NetworkUtils;
 
 import org.json.JSONArray;
@@ -37,12 +38,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class MainEventsFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
+    public static final int CHECK_FOR_CHANGE_REQUEST = 1;
     public static final String EXTRA_HREF = "com.nejc.ribic.veselica.href";
     private static final String ARG_SECTION_NUMBER = "section_number";
     public RecyclerView mRecyclerView;
@@ -113,9 +117,26 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
     public void partyOnClick(int clickedItemIndex) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
-        startActivity(intent);
+        startActivityForResult(intent, CHECK_FOR_CHANGE_REQUEST);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHECK_FOR_CHANGE_REQUEST){
+            if (resultCode == RESULT_OK){
+                readDataFromDatabase();
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        if (Constants.fragmentContentChanged) {
+//            Constants.fragmentContentChanged = false;
+//            readDataFromDatabase();
+//        }
+        super.setUserVisibleHint(isVisibleToUser);
+    }
 
     private void fetchData() {
         String url = NetworkUtils.getUrlAll();
@@ -224,6 +245,5 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
             }
         }.execute();
     }
-
 
 }

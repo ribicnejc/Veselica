@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Veselica</string>
+    <string name="menu_item_settings">Nastavitve</string>
+    <string name="no_data_availabe_to_show">Podatkov trenutno ni na voljo, prosimo osvežite ali pa počakajte internetno povezavo</string>
+    <string name="no_favorites_events">Trenunto še nimate priljubljenih veselic</string>
+    <string name="no_internet_connection">Brez internetne povezave</string>
+    <string name="no_videos_for_this_event">Ni video posnetkov za ta dogodek</string>
+    <string name="notification_title">Današnji dogodki</string>
+    <string name="notification_title_favorite">Priljubljeni dogodki</string>
+    <string name="page_all">Vse</string>
+    <string name="page_favorites">Priljubljene</string>
+    <string name="page_notify">Opozori</string>
+    <string name="pref_location_label">Lokacija</string>
+    <string name="pref_notification_disabled">Neboste obveščeni</string>
+    <string name="pref_notification_enabled">Na dan dogodka boste obveščeni</string>
+    <string name="pref_notification_title">Obvestila</string>
+    <string name="toast_notify_event_when_favorited">Obveščeni boste o tem dogodku</string>
+    <string name="try_again">Poskusite ponovno</string>
+</resources>

@@ -10,7 +10,6 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
@@ -18,31 +17,30 @@ import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterViewHolder> {
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteAdapterViewHolder> {
     private ArrayList<Party> mParties;
-    private final MainAdapter.MainAdapterOnClickHandler mClickHandler;
+    private final FavoriteAdapter.FavoriteAdapterOnClickHandler mClickHandler;
 
-    public interface MainAdapterOnClickHandler{
+    public interface FavoriteAdapterOnClickHandler{
         void partyOnClick(int clickedItemIndex);
     }
 
-    public MainAdapter(ArrayList<Party> mParties, MainAdapterOnClickHandler mClickHandler){
+    public FavoriteAdapter(ArrayList<Party> mParties, FavoriteAdapterOnClickHandler mClickHandler){
         this.mParties = mParties;
         this.mClickHandler = mClickHandler;
     }
 
     @Override
-    public MainAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavoriteAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item, parent, false);
-        return new MainAdapterViewHolder(view);
+        return new FavoriteAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MainAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(final FavoriteAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
         if (mParties.get(position) != null){
@@ -63,7 +61,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
                 }else{
                     PrefUtils.saveName(party.toString(), holder.itemView.getContext());
                     holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
-                    }
+                }
             }
         });
         setAnimation(holder.itemView, position);
@@ -75,13 +73,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         return mParties.size();
     }
 
-    class MainAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class FavoriteAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTextViewDate;
         private TextView mTextViewParty;
         private ImageView mImageViewFavorite;
 
-        private MainAdapterViewHolder(View itemView) {
+        private FavoriteAdapterViewHolder(View itemView) {
             super(itemView);
             mTextViewDate = (TextView) itemView.findViewById(R.id.tv_party_date);
             mTextViewParty = (TextView) itemView.findViewById(R.id.tv_party_name);

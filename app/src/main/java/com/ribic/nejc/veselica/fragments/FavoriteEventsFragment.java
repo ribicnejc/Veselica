@@ -13,21 +13,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ribic.nejc.party.R;
+import com.ribic.nejc.veselica.adapters.FavoriteAdapter;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.ui.DetailActivity;
+import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.Set;
 
+import static android.app.Activity.RESULT_OK;
 import static com.ribic.nejc.veselica.fragments.MainEventsFragment.EXTRA_HREF;
 
-public class FavoriteEventsFragment extends Fragment implements MainAdapter.MainAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
+public class FavoriteEventsFragment extends Fragment implements FavoriteAdapter.FavoriteAdapterOnClickHandler, SwipeRefreshLayout.OnRefreshListener {
 
+    public static final int CHECK_FOR_CHANGE_REQUEST = 2;
     private static final String ARG_SECTION_NUMBER = "section_number";
     public RecyclerView mRecyclerView;
-    public MainAdapter mAdapter;
+    public FavoriteAdapter mAdapter;
     public ArrayList<Party> mParties;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public TextView mTextViewError;
@@ -98,7 +102,7 @@ public class FavoriteEventsFragment extends Fragment implements MainAdapter.Main
 
         checkIfEmpty();
 
-        mAdapter = new MainAdapter(elts, this);
+        mAdapter = new FavoriteAdapter(elts, this);
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setRefreshing(false);
 
@@ -108,7 +112,7 @@ public class FavoriteEventsFragment extends Fragment implements MainAdapter.Main
     public void partyOnClick(int clickedItemIndex) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra(EXTRA_HREF, mParties.get(clickedItemIndex).getHref());
-        startActivity(intent);
+        startActivityForResult(intent, CHECK_FOR_CHANGE_REQUEST);
     }
 
     @Override
@@ -121,6 +125,24 @@ public class FavoriteEventsFragment extends Fragment implements MainAdapter.Main
         if (mParties.size() == 0) {
             mTextViewError.setVisibility(View.VISIBLE);
         } else mTextViewError.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHECK_FOR_CHANGE_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                readData();
+            }
+        }
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        if (Constants.fragmentContentChanged) {
+//            Constants.fragmentContentChanged = false;
+//            readData();
+//        }
+        super.setUserVisibleHint(isVisibleToUser);
     }
 }

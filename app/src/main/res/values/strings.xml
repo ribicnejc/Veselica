@@ -2,14 +2,14 @@
     <string name="app_name">Veselica</string>
     <string name="notification_title">Today\'s events</string>
     <string name="notification_title_favorite">Favorite event reminder</string>
-    <string name="notification_text">Just some notification test</string>
-    <string name="notification_big_text">Some big text</string>
+    <string name="notification_text" translatable="false">Just some notification test</string>
+    <string name="notification_big_text" translatable="false">Some big text</string>
     <string name="page_all">All</string>
     <string name="page_favorites">Favorites</string>
     <string name="page_notify">Notify</string>
 
 
-    <string name="content_authority">com.ribic.nejc.party</string>
+    <string name="content_authority" translatable="false">com.ribic.nejc.party</string>
 
 
     <!-- - - - - - - - - - - -->
@@ -31,13 +31,13 @@
     <string name="pref_location_default" translatable="false">Mountain View, CA 94043</string>
 
     <!-- Label for the temperature units preference [CHAR LIMIT=30] -->
-    <string name="pref_units_label">Temperature Units</string>
+    <string name="pref_units_label" translatable="false">Temperature Units</string>
 
     <!-- Label for metric option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_units_label_metric">Metric</string>
+    <string name="pref_units_label_metric" translatable="false">Metric</string>
 
     <!-- Label for imperial option in temperature unit preference [CHAR LIMIT=25] -->
-    <string name="pref_units_label_imperial">Imperial</string>
+    <string name="pref_units_label_imperial" translatable="false">Imperial</string>
 
     <!-- Key name for temperature unit preference in SharedPreferences [CHAR LIMIT=NONE] -->
     <string name="pref_units_key" translatable="false">units</string>
@@ -57,5 +57,6 @@
     <string name="no_videos_for_this_event">No videos for this event</string>
     <string name="toast_notify_event_when_favorited">You will be notified about event</string>
     <string name="try_again">Try again</string>
+    <string name="no_data_on_that_search_query">No data on that search query</string>
 
 </resources>

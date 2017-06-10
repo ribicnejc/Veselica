@@ -1,5 +1,6 @@
 package com.ribic.nejc.veselica.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public ProgressBar mProgressBarVideos;
     public ImageView mImageViewFavorite;
     public Party party = null;
+    private boolean stared = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +169,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
     public void favoriteEvent(View view) {
         if (party != null){
-
+            stared = !stared;
             if (PrefUtils.exitsts(party.toString(), this)){
                 PrefUtils.remove(party.toString(), this);
                 mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
@@ -177,5 +179,16 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                 Toast.makeText(this, R.string.toast_notify_event_when_favorited, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (stared){
+            Intent intent = getIntent();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+            super.onBackPressed();
+        }
+        super.onBackPressed();
     }
 }

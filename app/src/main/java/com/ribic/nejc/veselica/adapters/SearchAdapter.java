@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,29 +21,29 @@ import com.ribic.nejc.veselica.utils.PrefUtils;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder> {
     private ArrayList<Party> mParties;
-    private final MainAdapter.MainAdapterOnClickHandler mClickHandler;
+    private final SearchAdapter.SearchAdapterOnClickHandler mClickHandler;
 
-    public interface MainAdapterOnClickHandler{
+    public interface SearchAdapterOnClickHandler{
         void partyOnClick(int clickedItemIndex);
     }
 
-    public MainAdapter(ArrayList<Party> mParties, MainAdapterOnClickHandler mClickHandler){
+    public SearchAdapter(ArrayList<Party> mParties, SearchAdapterOnClickHandler mClickHandler){
         this.mParties = mParties;
         this.mClickHandler = mClickHandler;
     }
 
     @Override
-    public MainAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SearchAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item, parent, false);
-        return new MainAdapterViewHolder(view);
+        return new SearchAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MainAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(final SearchAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
         if (mParties.get(position) != null){
@@ -63,7 +64,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
                 }else{
                     PrefUtils.saveName(party.toString(), holder.itemView.getContext());
                     holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
-                    }
+                }
             }
         });
         setAnimation(holder.itemView, position);
@@ -75,13 +76,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         return mParties.size();
     }
 
-    class MainAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class SearchAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTextViewDate;
         private TextView mTextViewParty;
         private ImageView mImageViewFavorite;
 
-        private MainAdapterViewHolder(View itemView) {
+        private SearchAdapterViewHolder(View itemView) {
             super(itemView);
             mTextViewDate = (TextView) itemView.findViewById(R.id.tv_party_date);
             mTextViewParty = (TextView) itemView.findViewById(R.id.tv_party_name);
@@ -98,7 +99,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
     private int lastPosition = -1;
 
 
-    private void setAnimation(View viewToAnimate, int position) {
+    /*private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
             ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -106,6 +107,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
             viewToAnimate.startAnimation(anim);
             lastPosition = position;
         }
+    }*/
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.slide_up_anim);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+
     }
 
 
