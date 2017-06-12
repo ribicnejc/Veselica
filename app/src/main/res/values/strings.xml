@@ -58,5 +58,9 @@
     <string name="toast_notify_event_when_favorited">You will be notified about event</string>
     <string name="try_again">Try again</string>
     <string name="no_data_on_that_search_query">No data on that search query</string>
+    <string name="detail_more">More:</string>
+    <string name="detail_region">Region:</string>
+    <string name="detail_when">When:</string>
+    <string name="detail_where">Where:</string>
 
 </resources>

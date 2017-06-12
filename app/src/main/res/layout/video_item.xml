@@ -25,6 +25,7 @@
             tools:src="@drawable/to_delete_thumbnail" />
 
         <TextView
+            android:fontFamily="sans-serif-light"
             android:id="@+id/text_view_video_title_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
