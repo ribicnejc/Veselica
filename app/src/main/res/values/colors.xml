@@ -11,5 +11,5 @@
 
     <color name="colorRippleColor">@color/colorPrimary</color>
     <color name="colorFavorite">@color/colorYellow</color>
-
+    <color name="colorHintSearch">#777</color>
 </resources>

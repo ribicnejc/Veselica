@@ -39,7 +39,7 @@ public final class NotificationUtils {
 
     private static Bitmap largeIcon(Context context){
         Resources res = context.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.trees);
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.margarita);
         return largeIcon;
     }
 

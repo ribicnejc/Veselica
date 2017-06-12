@@ -32,6 +32,8 @@ import java.util.Calendar;
 
 import butterknife.ButterKnife;
 
+import static com.ribic.nejc.veselica.fragments.MainEventsFragment.EXTRA_HREF;
+
 public class MainActivity extends AppCompatActivity implements SearchAdapter.SearchAdapterOnClickHandler {
 
     public static String TAG = "stuff in main activity";
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        mSectionsPagerAdapter = new SectionPagerAdapter.SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionPagerAdapter.SectionsPagerAdapter(getSupportFragmentManager(), this);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -84,24 +86,12 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                return search(query);
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<Party> items = new ArrayList<>();
-                if (mItems == null) return false;
-                for (Party party : mItems) {
-                    String main = party.getDate().toLowerCase() + " " + party.getPlace().toLowerCase();
-                    if (main.contains(newText)) {
-                        items.add(party);
-                    }
-                }
-                if (items.size() == 0) mTextViewError.setVisibility(View.VISIBLE);
-                else mTextViewError.setVisibility(View.GONE);
-                mSearchAdapter = new SearchAdapter(items, MainActivity.this);
-                mRecyclerViewSearch.setAdapter(mSearchAdapter);
-                return true;
+                return search(newText);
             }
         });
 
@@ -143,6 +133,21 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), interval, pendingIntent);
     }
 
+    private boolean search(String newText){
+        ArrayList<Party> items = new ArrayList<>();
+        if (mItems == null) return false;
+        for (Party party : mItems) {
+            String main = party.getDate().toLowerCase() + " " + party.getPlace().toLowerCase();
+            if (main.contains(newText)) {
+                items.add(party);
+            }
+        }
+        if (items.size() == 0) mTextViewError.setVisibility(View.VISIBLE);
+        else mTextViewError.setVisibility(View.GONE);
+        mSearchAdapter = new SearchAdapter(items, MainActivity.this);
+        mRecyclerViewSearch.setAdapter(mSearchAdapter);
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -219,7 +224,9 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
 
     @Override
     public void partyOnClick(int clickedItemIndex) {
-
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(EXTRA_HREF, mItems.get(clickedItemIndex).getHref());
+        startActivity(intent);
     }
 }
 

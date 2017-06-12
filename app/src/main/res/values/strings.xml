@@ -4,7 +4,7 @@
     <string name="notification_title_favorite">Favorite event reminder</string>
     <string name="notification_text" translatable="false">Just some notification test</string>
     <string name="notification_big_text" translatable="false">Some big text</string>
-    <string name="page_all">All</string>
+    <string name="page_main">Main List</string>
     <string name="page_favorites">Favorites</string>
     <string name="page_notify">Notify</string>
 

@@ -15,31 +15,32 @@ import java.net.URL;
 import java.util.Scanner;
 
 public final class NetworkUtils {
+    private static final String API_KEY = "appid=b587472c-5fe5-4a16-83ae-626aa4aad33e";
     private static final String TAG = NetworkUtils.class.getSimpleName();
-    private static final String COUNTRY_PARTIES_MAIN = "http://dev.nejcribic.com/veselice_api/myApi.php?";
+    private static final String COUNTRY_PARTIES_MAIN = "http://api.nejcribic.com/veselica/myApi.php?";
     private static final String COUNTRY_PARTIES_URL = COUNTRY_PARTIES_MAIN + "getAll/";
 
 
     private static final String format = "json";
 
     public static String getUrlAll() {
-        return COUNTRY_PARTIES_URL;
+        return COUNTRY_PARTIES_URL + "&" + API_KEY;
     }
 
     public static String getUrlPlace(String place) {
-        return String.format("%s/place/%s", COUNTRY_PARTIES_URL, place);
+        return String.format("%s/place/%s&%s", COUNTRY_PARTIES_URL, place, API_KEY);
     }
 
     public static String getUrlDate(String date) {
-        return String.format("%s/date/%s", COUNTRY_PARTIES_URL, date);
+        return String.format("%s/date/%s&%s", COUNTRY_PARTIES_URL, date, API_KEY);
     }
 
     public static String getUrlDay(String day) {
-        return String.format("%s/day/%s", COUNTRY_PARTIES_URL, day);
+        return String.format("%s/day/%s&%s", COUNTRY_PARTIES_URL, day, API_KEY);
     }
 
     public static String getUrlMoreInfo(String href) {
-        return String.format("%smoreInfo%s", COUNTRY_PARTIES_MAIN, href);
+        return String.format("%smoreInfo%s&%s", COUNTRY_PARTIES_MAIN, href, API_KEY);
     }
 
 

@@ -164,7 +164,6 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         if (intent.resolveActivity(getPackageManager()) != null){
             startActivity(intent);
         }
-        Toast.makeText(this, mVideos.get(clickedItemIndex).getVideoUrl(), Toast.LENGTH_SHORT).show();
     }
 
     public void favoriteEvent(View view) {

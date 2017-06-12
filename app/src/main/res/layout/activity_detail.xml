@@ -84,7 +84,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorGray"
                     android:textSize="20sp"
-                    tools:text="Regija: Ljubljanska [Več iz te regije] " />
+                    tools:text="Regija: Ljubljanska" />
 
             </LinearLayout>
 
@@ -105,12 +105,12 @@
                 android:paddingRight="10dp"
                 android:textColor="@color/colorGray"
                 android:textSize="17sp"
-                tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali vas bodo fantje s skupine Gadi. Veselica bo pod velikim šotorom, za hrano in pijačo pa bomo poskrbeli gasilci PGD Ježica. V neposredni bližini prireditvenega šotora bo zagotovljeno parkirišče. LEPO VABLJENI! " />
+                tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:elevation="5dp"
                 android:gravity="center"
                 android:orientation="vertical">

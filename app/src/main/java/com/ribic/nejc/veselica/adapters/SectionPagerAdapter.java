@@ -1,18 +1,22 @@
 package com.ribic.nejc.veselica.adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.fragments.FavoriteEventsFragment;
 import com.ribic.nejc.veselica.fragments.MainEventsFragment;
 
 
 public class SectionPagerAdapter {
-    public static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+    public static class SectionsPagerAdapter extends FragmentPagerAdapter {
+        Context context;
+        public SectionsPagerAdapter(FragmentManager fm, Context context) {
             super(fm);
+            this.context = context;
         }
 
         @Override
@@ -34,9 +38,9 @@ public class SectionPagerAdapter {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Main list";
+                    return context.getResources().getString(R.string.page_main);
                 case 1:
-                    return "Favorites";
+                    return context.getResources().getString(R.string.page_favorites);
                 case 2:
                     return "Others";
             }
