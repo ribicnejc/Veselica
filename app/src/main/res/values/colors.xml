@@ -12,4 +12,14 @@
     <color name="colorRippleColor">@color/colorPrimary</color>
     <color name="colorFavorite">@color/colorYellow</color>
     <color name="colorHintSearch">#777</color>
+
+    <color name="colorLightGray">#757575</color>
+    <color name="colorLightBlue">#33279fc6</color>
+
+    <color name="colorSwipeRefresh1">@color/colorPrimaryDark</color>
+    <color name="colorSwipeRefresh2">@color/colorGreenColor</color>
+    <color name="colorSwipeRefresh3">@color/colorFavoriteRed</color>
+
+    <color name="colorGradientTop">#2eb9e7</color>
+    <color name="colorGradientBottom">@android:color/white</color>
 </resources>

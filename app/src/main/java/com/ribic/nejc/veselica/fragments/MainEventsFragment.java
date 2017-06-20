@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
     public static final int CHECK_FOR_CHANGE_REQUEST = 1;
     public static final String EXTRA_HREF = "com.nejc.ribic.veselica.href";
     private static final String ARG_SECTION_NUMBER = "section_number";
+
     public RecyclerView mRecyclerView;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public MainAdapter mMainAdapter;
@@ -81,7 +83,11 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh);
         mTextViewError = (TextView) rootView.findViewById(R.id.text_view_error);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-
+        mSwipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh1),
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh2),
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh3)
+        );
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

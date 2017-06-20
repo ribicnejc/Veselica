@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
@@ -18,11 +18,11 @@ import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterViewHolder> {
     private ArrayList<Party> mParties;
     private final MainAdapter.MainAdapterOnClickHandler mClickHandler;
+
 
     public interface MainAdapterOnClickHandler{
         void partyOnClick(int clickedItemIndex);
@@ -45,6 +45,24 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
     public void onBindViewHolder(final MainAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
+
+        if (position == 0){
+            holder.mTextViewExpanded.setText(mParties.get(position).getDate());
+            holder.mTextViewExpanded.setVisibility(View.VISIBLE);
+            holder.mLinearLayout.setBackgroundResource(R.drawable.date_splitter_gradient);
+        }else if (!mParties.get(position-1).getDate().equals(mParties.get(position).getDate())){
+            holder.mTextViewExpanded.setText(mParties.get(position).getDate());
+            holder.mTextViewExpanded.setVisibility(View.VISIBLE);
+            holder.mLinearLayout.setBackgroundResource(R.drawable.date_splitter_gradient);
+        }
+        else{
+            holder.mTextViewExpanded.setVisibility(View.GONE);
+            holder.mLinearLayout.setBackgroundResource(0);
+        }
+
+
+
+
         if (mParties.get(position) != null){
             Party party = mParties.get(position);
             if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext()))
@@ -77,15 +95,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
     class MainAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private TextView mTextViewExpanded;
         private TextView mTextViewDate;
         private TextView mTextViewParty;
         private ImageView mImageViewFavorite;
+        private LinearLayout mLinearLayout;
 
         private MainAdapterViewHolder(View itemView) {
             super(itemView);
             mTextViewDate = (TextView) itemView.findViewById(R.id.tv_party_date);
             mTextViewParty = (TextView) itemView.findViewById(R.id.tv_party_name);
             mImageViewFavorite = (ImageView) itemView.findViewById(R.id.image_view_icon_favorite);
+            mTextViewExpanded = (TextView) itemView.findViewById(R.id.tv_item_expanded_view);
+            mLinearLayout = (LinearLayout) itemView.findViewById(R.id.ly_item);
             itemView.setOnClickListener(this);
         }
 

@@ -9,6 +9,8 @@
         android:id="@+id/linear_layout_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:visibility="visible"
         android:weightSum="12"
@@ -150,8 +152,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +177,7 @@
                 android:textColor="@color/colorGray"
                 android:textSize="17sp"
                 tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
+
 
         </LinearLayout>
 

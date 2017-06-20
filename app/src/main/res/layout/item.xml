@@ -1,52 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_item_expanded_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="@drawable/ripple"
-        android:orientation="vertical">
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif"
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:visibility="gone"
+        tools:text="Nedelja, 16. april 2017" />
+
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="12">
+            android:foreground="@drawable/ripple"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_party_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <TextView
+                    android:id="@+id/tv_party_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:fontFamily="sans-serif-light"
+                    android:padding="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    tools:text="Črni Vrh, Idrija - Fantje izpod Lisce" />
+
+                <ImageView
+                    android:id="@+id/image_view_icon_favorite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/icon_stared" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_party_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:padding="10dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                tools:text="Črni Vrh, Idrija - Fantje izpod Lisce" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="Nedelja, 16. april 2017" />
 
-            <ImageView
-                android:id="@+id/image_view_icon_favorite"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:layout_weight="2"
-                android:src="@drawable/icon_stared" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_party_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:padding="10dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            tools:text="Nedelja, 16. april 2017" />
-
-
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

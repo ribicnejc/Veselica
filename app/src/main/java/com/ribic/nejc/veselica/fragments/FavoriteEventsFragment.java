@@ -1,8 +1,10 @@
 package com.ribic.nejc.veselica.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,6 +60,14 @@ public class FavoriteEventsFragment extends Fragment implements FavoriteAdapter.
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_favorites);
         mTextViewError = (TextView) rootView.findViewById(R.id.text_view_error_favorite);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+
+
+        mSwipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh1),
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh2),
+                ContextCompat.getColor(getContext(), R.color.colorSwipeRefresh3)
+                );
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
