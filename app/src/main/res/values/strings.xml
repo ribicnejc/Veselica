@@ -12,6 +12,10 @@
     <string name="content_authority" translatable="false">com.ribic.nejc.party</string>
 
 
+    <string name="long_dummy" translatable="false">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </string>
+
     <!-- - - - - - - - - - - -->
     <!--Used by Preferences  -->
     <!-- - - - - - - - - - - -->
@@ -62,5 +66,6 @@
     <string name="detail_region">Region:</string>
     <string name="detail_when">When:</string>
     <string name="detail_where">Where:</string>
+    <string name="detail_videos">Videos:</string>
 
 </resources>

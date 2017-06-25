@@ -7,7 +7,6 @@
     android:orientation="horizontal"
     android:elevation="5dp"
     android:layout_margin="5dp"
-
     app:cardCornerRadius="2dp">
 
     <RelativeLayout
@@ -15,24 +14,35 @@
         android:layout_height="wrap_content"
         android:foreground="@drawable/ripple"
         android:weightSum="5">
-
-
-        <ImageView
-            android:id="@+id/image_view_item_thumbnail"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            tools:src="@drawable/to_delete_thumbnail" />
+            android:layout_height="wrap_content"
+            android:id="@+id/thumb_frame">
+
+            <ImageView
+                android:id="@+id/image_view_item_thumbnail"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                tools:src="@drawable/to_delete_thumbnail" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/icon_youtube" />
+
+        </RelativeLayout>
 
         <TextView
-            android:fontFamily="sans-serif-light"
             android:id="@+id/text_view_video_title_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/image_view_item_thumbnail"
+            android:layout_toEndOf="@id/thumb_frame"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
@@ -19,17 +17,16 @@ import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchAdapterViewHolder> {
     private ArrayList<Party> mParties;
     private final SearchAdapter.SearchAdapterOnClickHandler mClickHandler;
 
-    public interface SearchAdapterOnClickHandler{
+    public interface SearchAdapterOnClickHandler {
         void partyOnClick(int clickedItemIndex);
     }
 
-    public SearchAdapter(ArrayList<Party> mParties, SearchAdapterOnClickHandler mClickHandler){
+    public SearchAdapter(ArrayList<Party> mParties, SearchAdapterOnClickHandler mClickHandler) {
         this.mParties = mParties;
         this.mClickHandler = mClickHandler;
     }
@@ -46,7 +43,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchAdap
     public void onBindViewHolder(final SearchAdapterViewHolder holder, int position) {
         holder.mTextViewParty.setText(mParties.get(position).getPlace());
         holder.mTextViewDate.setText(mParties.get(position).getDate());
-        if (mParties.get(position) != null){
+        if (mParties.get(position) != null) {
             Party party = mParties.get(position);
             if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext()))
                 holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
@@ -58,10 +55,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchAdap
             @Override
             public void onClick(View view) {
                 Constants.fragmentContentChanged = !Constants.fragmentContentChanged;
-                if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext())){
+                if (PrefUtils.exitsts(party.toString(), holder.itemView.getContext())) {
                     PrefUtils.remove(party.toString(), holder.itemView.getContext());
                     holder.mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
-                }else{
+                } else {
                     PrefUtils.saveName(party.toString(), holder.itemView.getContext());
                     holder.mImageViewFavorite.setImageResource(R.drawable.icon_stared);
                 }
@@ -96,30 +93,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchAdap
             mClickHandler.partyOnClick(position);
         }
     }
+
     private int lastPosition = -1;
 
-
-    /*private void setAnimation(View viewToAnimate, int position) {
+    private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
-            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(100);//to make duration random number between [0,501)
-            viewToAnimate.startAnimation(anim);
-            lastPosition = position;
-        }
-    }*/
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
             Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.slide_up_anim);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
 
     }
-
 
 
 }

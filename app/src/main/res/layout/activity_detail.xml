@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_gravity="center">-->
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,185 +19,174 @@
         android:weightSum="12"
         tools:context="com.ribic.nejc.veselica.ui.DetailActivity">
 
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:weightSum="12">
-
-            <TextView
-                android:id="@+id/text_view_actors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:fontFamily="sans-serif-bold"
-                android:padding="10dp"
-                android:textColor="@android:color/black"
-                android:textSize="25sp"
-                tools:text="Skupina Gadi" />
-
-
-            <ImageView
-                android:id="@+id/image_view_favorite"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="9"
-                android:onClick="favoriteEvent"
-                android:src="@drawable/icon_favorite" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardCornerRadius="0dp"
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                android:weightSum="12">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:weightSum="12">
+
+                    <TextView
+                        android:id="@+id/text_view_actors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="3"
+                        android:fontFamily="sans-serif-bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp"
+                        tools:text="Skupina Gadi" />
+
+
+                    <ImageView
+                        android:id="@+id/image_view_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="9"
+                        android:onClick="favoriteEvent"
+                        android:src="@drawable/icon_favorite" />
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+
+                            android:weightSum="12">
+
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="9"
+                                android:text="@string/detail_where"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/text_view_location"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textColor="@color/colorGray"
+                                android:textSize="20sp"
+                                tools:text="Ježica, Ljubljana" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="12">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="9"
+                                android:text="@string/detail_when"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/text_view_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textColor="@color/colorGray"
+                                android:textSize="20sp"
+                                tools:text="Sobota, 27. maj 2017" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="12">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="9"
+                                android:text="@string/detail_region"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/text_view_region"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textColor="@color/colorGray"
+                                android:textSize="20sp"
+                                tools:text="Ljubljanska" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
 
 
                 <TextView
+                    android:id="@+id/text_view_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="9"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/detail_where"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/text_view_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="sans-serif-light"
+                    android:padding="10dp"
                     android:textColor="@color/colorGray"
-                    android:textSize="20sp"
-                    tools:text="Ježica, Ljubljana" />
+                    android:textSize="17sp"
+                    tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:weightSum="12">
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="9"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/detail_when"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/text_view_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/colorGray"
-                    android:textSize="20sp"
-                    tools:text="Sobota, 27. maj 2017" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:weightSum="12">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="9"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/detail_region"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/text_view_region"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/colorGray"
-                    android:textSize="20sp"
-                    tools:text="Ljubljanska" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-light"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="15dp"
-                android:text="@string/detail_more"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/text_view_about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/colorGray"
-                android:textSize="17sp"
-                tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
-
-
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="5dp"
             android:gravity="center"
             android:orientation="vertical">
-
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
                 android:visibility="visible">
 
             </android.support.v7.widget.RecyclerView>
@@ -214,6 +206,8 @@
                 android:layout_height="30dp"
                 android:visibility="gone" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 
@@ -223,4 +217,4 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-</RelativeLayout>
+</RelativeLayout><!--</ScrollView>-->

@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     private void fetchData(final String href){
         mProgressBarMain.setVisibility(View.VISIBLE);
         mProgressBarVideos.setVisibility(View.VISIBLE);
-        mLayout.setVisibility(GONE);
+        mLayout.setVisibility(View.INVISIBLE);
         String url = NetworkUtils.getUrlMoreInfo(href);
         final RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -116,8 +116,9 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                             String region = response.getString("region");
                             String about = response.getString("about");
                             String id = response.getInt("id") + "";
-                            setTitle(title);
+                            //setTitle(title);
                             String tit = title.split(": ")[1];
+                            setTitle(actors);
                             party = new Party(date, tit, href, id);
 
                             mTextViewDate.setText(date);

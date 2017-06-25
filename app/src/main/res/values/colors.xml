@@ -20,6 +20,6 @@
     <color name="colorSwipeRefresh2">@color/colorGreenColor</color>
     <color name="colorSwipeRefresh3">@color/colorFavoriteRed</color>
 
-    <color name="colorGradientTop">#2eb9e7</color>
+    <color name="colorGradientTop">#279fc6</color>
     <color name="colorGradientBottom">@android:color/white</color>
 </resources>
