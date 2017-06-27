@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/relative_layout_root"
+    android:background="@color/colorSmokeGrayDark"
     android:layout_height="match_parent">
 
 
@@ -23,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="0dp"
-            app:cardElevation="5dp">
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -166,7 +168,7 @@
                     android:id="@+id/text_view_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="15dp"
                     android:textColor="@color/colorGray"
                     android:textSize="17sp"
                     tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
@@ -216,5 +218,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/image_view_sad_smile"
+        android:visibility="gone"
+        android:src="@drawable/icon_sad_smile"/>
+    <!--<TextView-->
+
+        <!--android:src="@drawable/icon_sad_smile"-->
+        <!--android:id="@+id/text_view_error_detail_no_internet"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:padding="20dp"-->
+        <!--android:visibility="visible"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="16sp"-->
+        <!--android:text="@string/no_internet_connection_try_again_later"/>-->
 
 </RelativeLayout><!--</ScrollView>-->

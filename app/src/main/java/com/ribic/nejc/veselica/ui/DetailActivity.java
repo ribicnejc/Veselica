@@ -3,8 +3,9 @@ package com.ribic.nejc.veselica.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 
 import static android.view.View.GONE;
 
-public class DetailActivity extends AppCompatActivity implements VideosAdapter.TrailersAdapterOnClickHandler{
+public class DetailActivity extends AppCompatActivity implements VideosAdapter.TrailersAdapterOnClickHandler {
 
     public final String TAG = "nejc";//DetailActivity.this.getSimpleName();
     public TextView mTextViewDate;
@@ -52,7 +53,10 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public ProgressBar mProgressBarMain;
     public ProgressBar mProgressBarVideos;
     public ImageView mImageViewFavorite;
+    public ImageView mImageViewError;
     public Party party = null;
+    public Snackbar mSnackBar;
+    public String href = "";
     private boolean stared = false;
 
     @Override
@@ -60,11 +64,11 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        if (!getIntent().hasExtra(MainEventsFragment.EXTRA_HREF)){
+        if (!getIntent().hasExtra(MainEventsFragment.EXTRA_HREF)) {
             return;
         }
 
-        String href = getIntent().getStringExtra(MainEventsFragment.EXTRA_HREF);
+        href = getIntent().getStringExtra(MainEventsFragment.EXTRA_HREF);
         mTextViewDate = (TextView) findViewById(R.id.text_view_date);
         mTextViewActors = (TextView) findViewById(R.id.text_view_actors);
         mTextViewLocation = (TextView) findViewById(R.id.text_view_location);
@@ -76,6 +80,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         mProgressBarVideos = (ProgressBar) findViewById(R.id.progress_bar_videos);
         mImageViewFavorite = (ImageView) findViewById(R.id.image_view_favorite);
         mTextViewError = (TextView) findViewById(R.id.text_view_error_detail_no_videos);
+        mImageViewError = (ImageView) findViewById(R.id.image_view_sad_smile);
         mLayout.setVisibility(GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -83,12 +88,33 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
         mRecyclerView.setLayoutManager(layoutManager);
 
+        mSnackBar = Snackbar.make(mLayout, "No internet connection", Snackbar.LENGTH_INDEFINITE);
 
-        fetchData(href);
+        onRefresh();
+
     }
 
-    private void checkFavorite(){
-        if (party != null){
+    private void onRefresh() {
+        if (!NetworkUtils.networkUp(this)) {
+            mSnackBar = Snackbar.make(mLayout, "No internet connection", Snackbar.LENGTH_INDEFINITE);
+            mProgressBarMain.setVisibility(GONE);
+            mSnackBar.setAction(R.string.try_again, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRefresh();
+                }
+            });
+            mSnackBar.show();
+            mImageViewError.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBarMain.setVisibility(View.VISIBLE);
+            mSnackBar.dismiss();
+            fetchData(href);
+        }
+    }
+
+    private void checkFavorite() {
+        if (party != null) {
             if (PrefUtils.exitsts(party.toString(), this))
                 mImageViewFavorite.setImageResource(R.drawable.icon_stared);
             else
@@ -96,10 +122,11 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
         }
     }
 
-    private void fetchData(final String href){
+    private void fetchData(final String href) {
         mProgressBarMain.setVisibility(View.VISIBLE);
         mProgressBarVideos.setVisibility(View.VISIBLE);
         mLayout.setVisibility(View.INVISIBLE);
+        mImageViewError.setVisibility(GONE);
         String url = NetworkUtils.getUrlMoreInfo(href);
         final RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -108,7 +135,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                     @Override
                     public void onResponse(JSONObject response) {
                         mVideos = new ArrayList<>();
-                        try{
+                        try {
                             String title = response.getString("title");
                             String date = response.getString("date");
                             String actors = response.getString("actors");
@@ -135,24 +162,37 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                                 Video video = new Video(videoTitle, thumb, youtube);
                                 mVideos.add(video);
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Log.i(TAG, e.getLocalizedMessage());
+                            mProgressBarMain.setVisibility(GONE);
+                            mLayout.setVisibility(GONE);
+                            mImageViewError.setVisibility(View.VISIBLE);
+                            onRefresh();
                         }
+                        mImageViewError.setVisibility(GONE);
                         mAdapter = new VideosAdapter(mVideos, DetailActivity.this);
                         mRecyclerView.setAdapter(mAdapter);
                         mProgressBarMain.setVisibility(GONE);
                         mLayout.setVisibility(View.VISIBLE);
                         mProgressBarVideos.setVisibility(GONE);
                         checkFavorite();
-                        if (mVideos.size() == 0){
+                        if (mVideos.size() == 0) {
+                            mRecyclerView.setVisibility(GONE);
                             mTextViewError.setVisibility(View.VISIBLE);
-                        }else mTextViewError.setVisibility(View.INVISIBLE);
+                        } else {
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mTextViewError.setVisibility(View.INVISIBLE);
+                        }
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.i(TAG, error.getLocalizedMessage());
+                mProgressBarMain.setVisibility(GONE);
+                mLayout.setVisibility(GONE);
+                mImageViewError.setVisibility(View.VISIBLE);
+                onRefresh();
             }
         });
         mRequestQueue.add(jsonObjReq);
@@ -162,18 +202,18 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public void trailersOnClick(int clickedItemIndex) {
         String MAIN_YOUTUBE = mVideos.get(clickedItemIndex).getVideoUrl();
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MAIN_YOUTUBE));
-        if (intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }
 
     public void favoriteEvent(View view) {
-        if (party != null){
+        if (party != null) {
             stared = !stared;
-            if (PrefUtils.exitsts(party.toString(), this)){
+            if (PrefUtils.exitsts(party.toString(), this)) {
                 PrefUtils.remove(party.toString(), this);
                 mImageViewFavorite.setImageResource(R.drawable.icon_unstared);
-            }else{
+            } else {
                 PrefUtils.saveName(party.toString(), this);
                 mImageViewFavorite.setImageResource(R.drawable.icon_stared);
                 Toast.makeText(this, R.string.toast_notify_event_when_favorited, Toast.LENGTH_SHORT).show();
@@ -183,7 +223,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
     @Override
     public void onBackPressed() {
-        if (stared){
+        if (stared) {
             Intent intent = getIntent();
             setResult(Activity.RESULT_OK, intent);
             finish();

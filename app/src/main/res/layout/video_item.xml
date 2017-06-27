@@ -5,20 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:elevation="5dp"
-    android:layout_margin="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="4dp"
     app:cardCornerRadius="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorSmokeGray"
         android:foreground="@drawable/ripple"
         android:weightSum="5">
+
         <RelativeLayout
+            android:id="@+id/thumb_frame"
             android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            android:id="@+id/thumb_frame">
+            android:layout_centerVertical="true">
 
             <ImageView
                 android:id="@+id/image_view_item_thumbnail"
@@ -40,12 +43,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/thumb_frame"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/thumb_frame"
+            android:padding="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
             tools:text="Ansambel Gadi - Tebe čakam" />
 
     </RelativeLayout>

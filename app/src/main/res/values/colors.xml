@@ -8,6 +8,9 @@
     <color name="colorFavoriteOrange">#FF5722</color>
     <color name="colorYellow">#FFB300</color>
     <color name="colorGray">#374046</color>
+    <color name="colorSmokeGray">#F8F8F8</color>
+    <color name="colorSmokeGrayDark">#F0F0F0</color>
+
 
     <color name="colorRippleColor">@color/colorPrimary</color>
     <color name="colorFavorite">@color/colorYellow</color>

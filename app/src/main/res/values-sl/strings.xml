@@ -17,4 +17,12 @@
     <string name="pref_notification_title">Obvestila</string>
     <string name="toast_notify_event_when_favorited">Obveščeni boste o tem dogodku</string>
     <string name="try_again">Poskusite ponovno</string>
+    <string name="detail_more">Več:</string>
+    <string name="detail_region">Regija:</string>
+    <string name="detail_videos">Videi:</string>
+    <string name="detail_when">Kdaj:</string>
+    <string name="detail_where">Kje:</string>
+    <string name="no_data_on_that_search_query">Ni podatkov za iskani niz</string>
+    <string name="no_internet_connection_try_again_later">Trenutno ni internetne povezave, poskusite ponovno kasneje</string>
+    <string name="page_main">Vse veslice</string>
 </resources>
