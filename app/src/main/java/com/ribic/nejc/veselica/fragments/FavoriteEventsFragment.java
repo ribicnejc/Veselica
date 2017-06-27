@@ -1,7 +1,6 @@
 package com.ribic.nejc.veselica.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -16,10 +15,8 @@ import android.widget.TextView;
 
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.FavoriteAdapter;
-import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.ui.DetailActivity;
-import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;
 
 import java.util.ArrayList;

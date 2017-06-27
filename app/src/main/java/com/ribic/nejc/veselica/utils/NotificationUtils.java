@@ -39,7 +39,7 @@ public final class NotificationUtils {
 
     private static Bitmap largeIcon(Context context){
         Resources res = context.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.margarita);
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.mipmap.icon);
         return largeIcon;
     }
 
@@ -51,7 +51,7 @@ public final class NotificationUtils {
     public static void remindUserForEvents(Context context, String message){
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 //.setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setSmallIcon(R.drawable.trees)
+                .setSmallIcon(R.drawable.margarita)
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(message)
