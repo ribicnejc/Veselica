@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Veselica</string>
+    <string name="app_name">Veselice</string>
     <string name="menu_item_settings">Nastavitve</string>
     <string name="no_data_availabe_to_show">Podatkov trenutno ni na voljo, prosimo osvežite ali pa počakajte internetno povezavo</string>
     <string name="no_favorites_events">Trenunto še nimate priljubljenih veselic</string>
@@ -25,4 +25,9 @@
     <string name="no_data_on_that_search_query">Ni podatkov za iskani niz</string>
     <string name="no_internet_connection_try_again_later">Trenutno ni internetne povezave, poskusite ponovno kasneje</string>
     <string name="page_main">Vse veslice</string>
+    <string name="error_fail_to_retrieve_data_from_db">Težava se je pojavila pri prejemanju podatkov iz podatkovne baze!</string>
+    <string name="error_no_data_in_db">Ni podatkov za prikaz v načinu brez interneta!</string>
+    <string name="error_no_internet_connection">Ni internetne povezave, poskusite osvežiti stran!</string>
+    <string name="error_web_page_down">Spletna stran veselica-info se trenutno ne odziva! :)</string>
+    <string name="error_occurred">Pojavila se je napaka</string>
 </resources>

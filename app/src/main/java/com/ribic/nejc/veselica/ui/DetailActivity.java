@@ -57,6 +57,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
     public Party party = null;
     public Snackbar mSnackBar;
     public String href = "";
+    public boolean errorOccured = false;
     private boolean stared = false;
 
     @Override
@@ -96,7 +97,20 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
     private void onRefresh() {
         if (!NetworkUtils.networkUp(this)) {
-            mSnackBar = Snackbar.make(mLayout, "No internet connection", Snackbar.LENGTH_INDEFINITE);
+            errorOccured = false;
+            mSnackBar = Snackbar.make(mLayout, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE);
+            mProgressBarMain.setVisibility(GONE);
+            mSnackBar.setAction(R.string.try_again, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRefresh();
+                }
+            });
+            mSnackBar.show();
+            mImageViewError.setVisibility(View.VISIBLE);
+        } else if (errorOccured){
+            errorOccured = false;
+            mSnackBar = Snackbar.make(mLayout, R.string.error_occurred, Snackbar.LENGTH_INDEFINITE);
             mProgressBarMain.setVisibility(GONE);
             mSnackBar.setAction(R.string.try_again, new View.OnClickListener() {
                 @Override
@@ -111,6 +125,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
             mSnackBar.dismiss();
             fetchData(href);
         }
+
     }
 
     private void checkFavorite() {
@@ -163,6 +178,7 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
                                 mVideos.add(video);
                             }
                         } catch (Exception e) {
+                            errorOccured = true;
                             Log.i(TAG, e.getLocalizedMessage());
                             mProgressBarMain.setVisibility(GONE);
                             mLayout.setVisibility(GONE);
@@ -188,7 +204,9 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, error.getLocalizedMessage());
+                if (error != null){
+                    Log.i(TAG, error.getLocalizedMessage());
+                }
                 mProgressBarMain.setVisibility(GONE);
                 mLayout.setVisibility(GONE);
                 mImageViewError.setVisibility(View.VISIBLE);

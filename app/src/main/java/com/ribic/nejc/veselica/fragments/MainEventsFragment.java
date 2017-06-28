@@ -182,18 +182,24 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                     getContext().getContentResolver().bulkInsert(PartyContract.PartyEntry.CONTENT_URI,
                             values.toArray(new ContentValues[values.size()]));
                 } catch (Exception e) {
+                    parties.clear();
                     e.printStackTrace();
                     Log.v(TAG, "problem appeared when parsing JSON");
                 }
 
 
                 if (parties.size() != 0) {
-                    //mRecyclerView.setVisibility(View.VISIBLE);
+                    mTextViewError.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
                     mParties = parties;
                     mMainAdapter = new MainAdapter(parties, MainEventsFragment.this);
                     mRecyclerView.setAdapter(mMainAdapter);
                     mSwipeRefreshLayout.setRefreshing(false);
-                    //TODO animate data afterwords
+                }else {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mTextViewError.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    mTextViewError.setText(getResources().getString(R.string.error_web_page_down));
                 }
 
                 Log.v(TAG, "Volley JsonArray data parsed and saved to database");
@@ -202,7 +208,9 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
             @Override
             public void onErrorResponse(VolleyError error) {
                 mSwipeRefreshLayout.setRefreshing(false);
-                //TODO show error
+                mTextViewError.setVisibility(View.VISIBLE);
+                mRecyclerView.setVisibility(View.INVISIBLE);
+                mTextViewError.setText(getResources().getString(R.string.error_web_page_down));
             }
         });
         queue.add(jsonArrayRequest);
@@ -223,6 +231,7 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                     cursor = getContext().getContentResolver().query(PartyContract.PartyEntry.CONTENT_URI, null, null, null, PartyContract.PartyEntry._ID);
                 } catch (Exception e) {
                     Log.v(TAG, "Failed to query data");
+                    //TODO show error reading from database
                     e.printStackTrace();
                 }
                 return cursor;
@@ -230,7 +239,13 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
 
             @Override
             protected void onPostExecute(Cursor cursor) {
-                if (cursor == null) return;
+                if (cursor == null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mTextViewError.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    mTextViewError.setText(getResources().getString(R.string.error_no_data_in_db));
+                    return;
+                }
                 ArrayList<Party> parties = new ArrayList<>();
                 if (cursor.moveToFirst()) {
                     do {
@@ -247,6 +262,13 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                 mSwipeRefreshLayout.setRefreshing(false);
                 mParties = parties;
                 mRecyclerView.setAdapter(mMainAdapter);
+
+                if (parties.size() == 0){
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mTextViewError.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    mTextViewError.setText(getResources().getString(R.string.error_no_data_in_db));
+                }
                 super.onPostExecute(cursor);
             }
         }.execute();

@@ -12,6 +12,14 @@
     <string name="content_authority" translatable="false">com.ribic.nejc.party</string>
 
 
+    <!--Error messages-->
+    <string name="error_web_page_down">Web page where I get data is currently down! :)</string>
+    <string name="error_no_internet_connection">No internet connection, try refreshing!</string>
+    <string name="error_no_data_in_db">No data to show in offline mode!</string>
+    <string name="error_fail_to_retrieve_data_from_db">I had problem retrieving data from data base in offline mode!</string>
+
+
+
     <string name="long_dummy" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </string>
@@ -69,5 +77,6 @@
     <string name="detail_videos">Videos:</string>
     <string name="no_internet_connection_try_again_later">No internet connection, try again later</string>
     <string name="page_all">All Events</string>
+    <string name="error_occurred">Error occurred</string>
 
 </resources>
