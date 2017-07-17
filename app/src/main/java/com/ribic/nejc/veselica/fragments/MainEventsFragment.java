@@ -196,10 +196,12 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                     mRecyclerView.setAdapter(mMainAdapter);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    mTextViewError.setVisibility(View.VISIBLE);
-                    mRecyclerView.setVisibility(View.INVISIBLE);
-                    mTextViewError.setText(getResources().getString(R.string.error_web_page_down));
+                    if(getActivity() != null && isAdded()){
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mTextViewError.setVisibility(View.VISIBLE);
+                        mRecyclerView.setVisibility(View.INVISIBLE);
+                        mTextViewError.setText(getResources().getString(R.string.error_web_page_down));
+                    }
                 }
 
                 Log.v(TAG, "Volley JsonArray data parsed and saved to database");
