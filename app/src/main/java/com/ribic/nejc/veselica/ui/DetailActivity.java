@@ -204,9 +204,6 @@ public class DetailActivity extends AppCompatActivity implements VideosAdapter.T
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error != null){
-                    Log.i(TAG, error.getLocalizedMessage());
-                }
                 mProgressBarMain.setVisibility(GONE);
                 mLayout.setVisibility(GONE);
                 mImageViewError.setVisibility(View.VISIBLE);
