@@ -231,7 +231,6 @@ public class MainEventsFragment extends Fragment implements MainAdapter.MainAdap
                     cursor = getContext().getContentResolver().query(PartyContract.PartyEntry.CONTENT_URI, null, null, null, PartyContract.PartyEntry._ID);
                 } catch (Exception e) {
                     Log.v(TAG, "Failed to query data");
-                    //TODO show error reading from database
                     e.printStackTrace();
                 }
                 return cursor;

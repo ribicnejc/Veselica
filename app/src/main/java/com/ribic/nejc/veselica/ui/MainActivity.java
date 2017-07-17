@@ -19,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.ribic.nejc.party.R;
 import com.ribic.nejc.veselica.adapters.SearchAdapter;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
     public TabLayout tabLayout;
     public ArrayList<Party> mItems;
     public TextView mTextViewError;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,16 @@ public class MainActivity extends AppCompatActivity implements SearchAdapter.Sea
                 return search(newText);
             }
         });
+
+
+
+        MobileAds.initialize(this, "ca-app-pub-9063494299873125~6564237697");
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("EF90B385FA7E86AC5D3194CEBEAB9E2E")
+                .build();
+        mAdView.loadAd(adRequest);
+
 
 
         defaultAlarmNotification();
