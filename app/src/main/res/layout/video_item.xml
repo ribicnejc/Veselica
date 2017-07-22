@@ -23,11 +23,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true">
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/image_view_item_thumbnail"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="5dp"
+                android:visibility="visible"
                 tools:src="@drawable/to_delete_thumbnail" />
 
             <ImageView

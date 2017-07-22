@@ -24,7 +24,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="5"
             app:cardCornerRadius="0dp"
             app:cardElevation="8dp">
 
@@ -48,9 +48,11 @@
                         android:layout_margin="10dp"
                         android:layout_weight="3"
                         android:fontFamily="sans-serif-bold"
+                        android:maxLines="2"
+                        android:scrollbars="vertical"
                         android:textColor="@android:color/black"
                         android:textSize="25sp"
-                        tools:text="Skupina Gadi" />
+                        tools:text="Skupina Gadi in še nekej itd in še ena vrstica" />
 
 
                     <ImageView
@@ -164,19 +166,20 @@
 
                 </android.support.v7.widget.CardView>
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/text_view_about"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:textColor="@color/colorGray"
-                        android:textSize="17sp"
-                        tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
 
-                </ScrollView>
+                <TextView
+                    android:id="@+id/text_view_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="5"
+                    android:padding="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorGray"
+                    android:textSize="17sp"
+                    tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
+
 
             </LinearLayout>
 
@@ -184,9 +187,9 @@
         </android.support.v7.widget.CardView>
 
         <LinearLayout
-            android:layout_weight="6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="7"
             android:gravity="center"
             android:orientation="vertical">
 

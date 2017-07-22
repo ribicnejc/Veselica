@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_gravity="center">-->
-
+<?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +22,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
             app:cardCornerRadius="0dp"
             app:cardElevation="8dp">
 
@@ -47,9 +47,12 @@
                         android:layout_margin="10dp"
                         android:layout_weight="3"
                         android:fontFamily="sans-serif-bold"
+                        android:maxLines="2"
+                        android:scrollbars="vertical"
                         android:textColor="@android:color/black"
                         android:textSize="25sp"
-                        tools:text="Skupina Gadi" />
+                        tools:text="Skupina Gadi in še nekej itd in še ena vrstica" />
+
 
 
                     <ImageView
@@ -167,8 +170,12 @@
                 <TextView
                     android:id="@+id/text_view_about"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:layout_height="match_parent"
+                    android:maxLines="5"
+                    android:padding="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:scrollbars="vertical"
                     android:textColor="@color/colorGray"
                     android:textSize="17sp"
                     tools:text="PGD Ježica vas vabi na tradicionalno veliko vrtno veselico od 18. ure naprej. Zabavali v " />
@@ -180,6 +187,7 @@
 
 
         <LinearLayout
+            android:layout_weight="7"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -226,19 +234,4 @@
         android:id="@+id/image_view_sad_smile"
         android:visibility="gone"
         android:src="@drawable/icon_sad_smile"/>
-    <!--<TextView-->
-
-        <!--android:src="@drawable/icon_sad_smile"-->
-        <!--android:id="@+id/text_view_error_detail_no_internet"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:fontFamily="sans-serif-light"-->
-        <!--android:padding="20dp"-->
-        <!--android:visibility="visible"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="16sp"-->
-        <!--android:text="@string/no_internet_connection_try_again_later"/>-->
-
-</RelativeLayout><!--</ScrollView>-->
+</RelativeLayout>
