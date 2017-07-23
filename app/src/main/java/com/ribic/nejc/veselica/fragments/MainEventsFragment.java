@@ -25,7 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.adapters.MainAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
 import com.ribic.nejc.veselica.objects.Party;

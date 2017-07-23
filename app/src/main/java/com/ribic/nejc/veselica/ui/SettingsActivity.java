@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

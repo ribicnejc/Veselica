@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.adapters.FavoriteAdapter;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.ui.DetailActivity;

@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.objects.Party;
 import com.ribic.nejc.veselica.utils.Constants;
 import com.ribic.nejc.veselica.utils.PrefUtils;

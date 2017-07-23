@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;

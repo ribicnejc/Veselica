@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.adapters.SearchAdapter;
 import com.ribic.nejc.veselica.adapters.SectionPagerAdapter;
 import com.ribic.nejc.veselica.data.PartyContract;
