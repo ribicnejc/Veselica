@@ -78,6 +78,6 @@
     <string name="no_internet_connection_try_again_later">No internet connection, try again later</string>
     <string name="page_all">All Events</string>
     <string name="error_occurred">Error occurred</string>
-    <string name="main_bellow_add_unit_id">ca-app-pub-9063494299873125/9517704094</string>
+    <string name="main_bellow_add_unit_id" translatable="false">ca-app-pub-9063494299873125/9517704094</string>
 
 </resources>
