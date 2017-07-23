@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Veselice</string>
+    <string name="app_name">Pregledovalnik Veselic</string>
     <string name="menu_item_settings">Nastavitve</string>
     <string name="no_data_availabe_to_show">Podatkov trenutno ni na voljo, prosimo osvežite ali pa počakajte internetno povezavo</string>
     <string name="no_favorites_events">Trenunto še nimate priljubljenih veselic</string>

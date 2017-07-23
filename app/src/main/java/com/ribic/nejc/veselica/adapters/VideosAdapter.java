@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.objects.Video;
 
 import java.util.ArrayList;

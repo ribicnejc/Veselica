@@ -11,7 +11,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
-import com.ribic.nejc.party.R;
+import com.ribicnejc.party.R;
 import com.ribic.nejc.veselica.ui.MainActivity;
 import com.ribic.nejc.veselica.notification.PartyReminderIntentService;
 import com.ribic.nejc.veselica.notification.ReminderTask;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Veselice</string>
+    <string name="app_name">Pregledovalnik Veselic</string>
     <string name="notification_title">Today\'s events</string>
     <string name="notification_title_favorite">Favorite event reminder</string>
     <string name="notification_text" translatable="false">Just some notification test</string>
