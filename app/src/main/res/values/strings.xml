@@ -63,6 +63,19 @@
     <string name="no_internet_connection">No internet connection</string>
 
 
+    <string name="pref_style_key" translatable="false">style</string>
+    <string name="pref_style_title">Choose Theme</string>
+    <string name="pref_style_label_blue">Blue Sky</string>
+    <string name="pref_style_label_green">Green Nature</string>
+    <string name="pref_style_label_yellow">Yellow Sun</string>
+    <string name="pref_style_label_red">Red Love</string>
+
+    <string name="pref_style_value_blue">blue_sky</string>
+    <string name="pref_style_value_green">green_nature</string>
+    <string name="pref_style_value_yellow">yellow_sun</string>
+    <string name="pref_style_value_red">red_love</string>
+
+
     <string name="pref_favorite_names_key" translatable="false">pref_favorite_names_key</string>
     <string name="no_data_availabe_to_show">No data available right now, please refresh or wait to internet</string>
     <string name="no_favorites_events">No favorites events saved yet</string>

@@ -10,4 +10,17 @@
         <item>@string/pref_units_imperial</item>
     </string-array>
 
+    <string-array name="pref_style_options">
+        <item>@string/pref_style_label_blue</item>
+        <item>@string/pref_style_label_green</item>
+        <item>@string/pref_style_label_yellow</item>
+        <item>@string/pref_style_label_red</item>
+    </string-array>
+    <string-array name="pref_style_values">
+        <item>@string/pref_style_value_blue</item>
+        <item>@string/pref_style_value_green</item>
+        <item>@string/pref_style_value_yellow</item>
+        <item>@string/pref_style_value_red</item>
+    </string-array>
+
 </resources>

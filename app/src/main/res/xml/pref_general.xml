@@ -4,24 +4,32 @@
     android:layout_height="match_parent">
 
     <!--<EditTextPreference-->
-        <!--android:defaultValue="@string/pref_location_default"-->
-        <!--android:inputType="text"-->
-        <!--android:key="@string/pref_location_key"-->
-        <!--android:singleLine="true"-->
-        <!--android:title="@string/pref_location_label" />-->
+    <!--android:defaultValue="@string/pref_location_default"-->
+    <!--android:inputType="text"-->
+    <!--android:key="@string/pref_location_key"-->
+    <!--android:singleLine="true"-->
+    <!--android:title="@string/pref_location_label" />-->
 
-    <!--<ListPreference-->
-        <!--android:defaultValue="@string/pref_units_metric"-->
-        <!--android:entries="@array/pref_units_options"-->
-        <!--android:entryValues="@array/pref_units_values"-->
-        <!--android:key="@string/pref_units_key"-->
-        <!--android:title="@string/pref_units_label" />-->
 
     <CheckBoxPreference
         android:defaultValue="@bool/pref_notification_default"
         android:key="@string/pref_notification_key"
-        android:title="@string/pref_notification_title"
+        android:summaryOff="@string/pref_notification_disabled"
         android:summaryOn="@string/pref_notification_enabled"
-        android:summaryOff="@string/pref_notification_disabled"/>
+        android:title="@string/pref_notification_title" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_style_value_blue"
+        android:entries="@array/pref_style_options"
+        android:entryValues="@array/pref_style_values"
+        android:key="@string/pref_style_key"
+        android:title="@string/pref_style_title" />
+
+    <!--<ListPreference-->
+    <!--android:defaultValue="@string/pref_units_metric"-->
+    <!--android:entries="@array/pref_units_options"-->
+    <!--android:entryValues="@array/pref_units_values"-->
+    <!--android:key="@string/pref_units_key"-->
+    <!--android:title="@string/pref_units_label" />-->
 
 </PreferenceScreen>
